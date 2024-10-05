@@ -1,7 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineWeatherService.Core.Entities;
+using OnlineWeatherService.Infrastructure.AutoMapper;
 using OnlineWeatherService.Infrastructure.Persistence;
+using OnlineWeatherService.WCF.EnableLogic;
+using OnlineWeatherService.WCF.IServices;
+using OnlineWeatherService.WCF.Services;
+using SoapCore;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +22,23 @@ builder.Services.AddDbContext<WeatherDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<WeatherDbContext>().AddDefaultTokenProviders();
 
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole(); // or any other logging provider
 builder.Services.AddLogging();
 
+//register serivce
+builder.Services.AddSingleton(AutoMapperConfig.CreateMapper());
+builder.Services.LoadLogic();
+
+
 var app = builder.Build();
+
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);  
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

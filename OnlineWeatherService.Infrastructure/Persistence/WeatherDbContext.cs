@@ -10,7 +10,6 @@ namespace OnlineWeatherService.Infrastructure.Persistence
         {
 
         }
-      
         DbSet<Weather> Weathers { get; set; }
         DbSet<Forecast> Forecasts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
