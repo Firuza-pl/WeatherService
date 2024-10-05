@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineWeatherService.Core.Entities;
-using System;
 
 namespace OnlineWeatherService.Infrastructure.Persistence
 {
@@ -13,7 +12,7 @@ namespace OnlineWeatherService.Infrastructure.Persistence
         }
       
         DbSet<Weather> Weathers { get; set; }
-
+        DbSet<Forecast> Forecasts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

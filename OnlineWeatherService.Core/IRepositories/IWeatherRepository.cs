@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OnlineWeatherService.Core.Entities;
 
 namespace OnlineWeatherService.Core.IRepositories
 {
-    internal class IWeatherRepository
+    public interface IWeatherRepository : IGenericRepository<Weather>
     {
+        //additional methods
+        Task<Weather> GetWeatherAsync(string name);
+        Task<Forecast> GetForeactWeeklyAsync(string name);
     }
 }
