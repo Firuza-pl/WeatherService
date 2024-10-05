@@ -1,4 +1,5 @@
-﻿using OnlineWeatherService.WCF.Models.Response;
+﻿using OnlineWeatherService.WCF.Models.Request;
+using OnlineWeatherService.WCF.Models.Response;
 using System.ServiceModel;
 
 namespace OnlineWeatherService.WCF.IServices
@@ -7,9 +8,9 @@ namespace OnlineWeatherService.WCF.IServices
     public interface IWeatherSoapService
     {
         [OperationContract]
-        WeatherResponse GetWeather(string city);
+        Task<WeatherResponse> GetWeather(WeatherRequest request);
 
         [OperationContract]
-        ForeCastResponse GetWeeklyForecast(string city);
+        Task<ForeCastResponse> GetWeeklyForecast(ForeCastRequest request);
     }
 }

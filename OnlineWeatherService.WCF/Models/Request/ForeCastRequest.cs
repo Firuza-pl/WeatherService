@@ -1,6 +1,6 @@
 ﻿namespace OnlineWeatherService.WCF.Models.Request
 {
-    public class WeatherRequest
+    public class ForeCastRequest
     {
         public string? City { get; set; }
     }

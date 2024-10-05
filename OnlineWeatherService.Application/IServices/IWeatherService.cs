@@ -4,8 +4,8 @@ namespace OnlineWeatherService.Application.IServices
 {
     public interface IWeatherService
     {
-       Task<WeatherDTO> GetWeatherAsync(string cityName);
-        Task<ForecastDTO> GetWeeklyForecastAsync(string cityName);
+        Task<WeatherDTO> GetWeatherAsync(CreateWeatherDTO request);
+        Task<ForecastDTO> GetWeeklyForecastAsync(CreateForecastDTO request);
 
     }
 }

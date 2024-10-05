@@ -1,6 +1,7 @@
-﻿using OnlineWeatherService.Application.IServices;
-using OnlineWeatherService.Core.Entities;
+﻿using OnlineWeatherService.Application.DTO;
+using OnlineWeatherService.Application.IServices;
 using OnlineWeatherService.WCF.IServices;
+using OnlineWeatherService.WCF.Models.Request;
 using OnlineWeatherService.WCF.Models.Response;
 using System.ServiceModel;
 
@@ -13,36 +14,48 @@ namespace OnlineWeatherService.WCF.Services
         {
             _weatherService = weatherService;
         }
-        public WeatherResponse GetWeather(string city)
+        public async Task<WeatherResponse> GetWeather(WeatherRequest request)
         {
-            var result = _weatherService.GetWeatherAsync(city).Result;
+            var result = await _weatherService.GetWeatherAsync(
+                new CreateWeatherDTO
+                {
+                    City = request.City
+                });
+
             if (result is null) throw new FaultException("Forecast data not found.");
 
             var outputModel = new WeatherResponse()
             {
                 City = result.City,
                 Description = result.Description,
-                Temperature = result.Temperature    
+                Temperature = result.Temperature
             };
 
             return outputModel;
         }
 
-        public ForeCastResponse GetWeeklyForecast(string city)
+
+        public async Task<ForeCastResponse> GetWeeklyForecast(ForeCastRequest request)
         {
-            var reesult = _weatherService.GetWeeklyForecastAsync(city).Result;
+            var reesult = await _weatherService.GetWeeklyForecastAsync(
+                new CreateForecastDTO
+                {
+                    City = request.City
+                });
+
             if (reesult is null) throw new FaultException("Forecast data not found.");
 
-            var outputModel = new ForeCastResponse()
+            var outputModel = new ForeCastResponse
             {
                 City = reesult.City,
-                DailyForecasts = reesult.DailyForecasts.Select(p => new WeatherResponse()
+                DailyForecasts = reesult.DailyForecasts.Select(p => new WeatherResponse
                 {
                     City = p.City,
                     Description = p.Description,
                     Temperature = p.Temperature
                 }).ToList()
             };
+
             return outputModel;
         }
     }
