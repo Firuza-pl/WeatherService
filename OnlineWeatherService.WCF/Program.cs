@@ -5,9 +5,7 @@ using OnlineWeatherService.Infrastructure.AutoMapper;
 using OnlineWeatherService.Infrastructure.Persistence;
 using OnlineWeatherService.WCF.EnableLogic;
 using OnlineWeatherService.WCF.IServices;
-using OnlineWeatherService.WCF.Services;
 using SoapCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 

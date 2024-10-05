@@ -14,27 +14,16 @@ namespace OnlineWeatherService.Application.Services
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
-        public async Task<WeatherDTO> GetWeatherAsync(CreateWeatherDTO request)
+        public async Task<WeatherDTO> GetWeatherAsync(string name)
         {
-            var entity = await _unitOfWork.WeatherkRepository.GetWeatherAsync(request.City);
+            var entity = await _unitOfWork.WeatherkRepository.GetWeatherAsync(name);
             var outputModel = _mapper.Map<WeatherDTO>(entity);
             return outputModel;
         }
 
-        public async Task<ForecastDTO> GetWeeklyForecastAsync(CreateForecastDTO request)
+        public async Task<ForecastDTO> GetWeeklyForecastAsync(string name)
         {
-            var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(request.City);
-
-            //return new ForecastDTO
-            //{
-            //    City = entity.City,
-            //    DailyForecasts = entity.DailyForecasts.Select(p => new WeatherDTO
-            //    {
-            //        City = p.City,
-            //        Description = p.Description,
-            //        Temperature = p.Temperature
-            //    }).ToList()
-            //};
+            var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(name);
 
             var outputModel = _mapper.Map<ForecastDTO>(entity);
             return outputModel;

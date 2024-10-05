@@ -1,5 +1,5 @@
-﻿using OnlineWeatherService.WCF.Models.Request;
-using OnlineWeatherService.WCF.Models.Response;
+﻿using OnlineWeatherService.WCF.Models.Response;
+using OnlineWeatherService.WCF.Services;
 using System.ServiceModel;
 
 namespace OnlineWeatherService.WCF.IServices
@@ -8,9 +8,11 @@ namespace OnlineWeatherService.WCF.IServices
     public interface IWeatherSoapService
     {
         [OperationContract]
-        Task<WeatherResponse> GetWeather(WeatherRequest request);
+        [FaultContract(typeof(ServiceFault))] //will return ServiceFault type
+        Task<WeatherResponse> GetWeather(string name);
 
         [OperationContract]
-        Task<ForeCastResponse> GetWeeklyForecast(ForeCastRequest request);
+        [FaultContract(typeof(ServiceFault))] 
+        Task<ForeCastResponse> GetWeeklyForecast(string name);
     }
 }
