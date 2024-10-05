@@ -37,7 +37,7 @@ var app = builder.Build();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);  
+    endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
 });
 
 // Configure the HTTP request pipeline.
