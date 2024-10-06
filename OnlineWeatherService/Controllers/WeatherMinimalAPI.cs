@@ -27,20 +27,24 @@ namespace OnlineWeatherService.Controllers
                     }
 
                     var result = await client.GetWeatherAsync(name);
-                    if (result is { })
+
+                    if (result is null)
                     {
-                        logger.LogInformation("Successfully retrieved weather data for city: {CityName}", name);
-                        apiResponse.Result= result;
-                        apiResponse.StatusCode = HttpStatusCode.OK;
-                        apiResponse.IsSuccesed= true;
+                        logger.LogWarning("Weather data not found for city: {CityName}", name);
+
+                        apiResponse.ErrorMessages.Add("entity is null");
+                        apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                        apiResponse.IsSuccesed = false;
                     }
 
-                    logger.LogWarning("Weather data not found for city: {CityName}", name);
-                    apiResponse.ErrorMessages.Add("entity is null");
-                    apiResponse.StatusCode = HttpStatusCode.BadRequest;
-                    apiResponse.IsSuccesed = false;
+                    logger.LogInformation("Successfully retrieved weather data for city: {CityName}", name);
 
-                    return Results.Ok(result);
+                    apiResponse.Result = result.Body.GetWeatherResult;
+                    apiResponse.StatusCode = HttpStatusCode.OK;
+                    apiResponse.IsSuccesed = true;
+                   
+
+                    return Results.Ok(apiResponse);
                 }
                 catch (Exception ex)
                 {

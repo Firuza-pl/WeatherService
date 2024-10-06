@@ -32,6 +32,7 @@ namespace OnlineWeatherService.Application.Services
             }
 
             var entity = await _unitOfWork.WeatherkRepository.GetWeatherAsync(name);
+
             var outputModel = _mapper.Map<WeatherDTO>(entity);
 
             if (outputModel == null)

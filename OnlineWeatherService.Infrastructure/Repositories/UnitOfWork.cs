@@ -9,7 +9,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
         private readonly WeatherDbContext _weatherDbContext;
         private readonly ILogger<WeatherRepository> _weatherLogger;
         private bool _dispose = false;
-        public UnitOfWork(WeatherDbContext contex, ILogger<WeatherRepository> weatherLogger) => (contex, weatherLogger) = (_weatherDbContext, _weatherLogger);
+        public UnitOfWork(WeatherDbContext weatherDbContext, ILogger<WeatherRepository> weatherLogger) => (_weatherDbContext, _weatherLogger) = (weatherDbContext, weatherLogger);
 
         private readonly IWeatherRepository _weatherRepository;
         public IWeatherRepository WeatherkRepository
