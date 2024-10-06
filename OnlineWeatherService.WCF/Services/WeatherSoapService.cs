@@ -1,5 +1,4 @@
 ﻿using OnlineWeatherService.Application.IServices;
-using OnlineWeatherService.Core.Entities;
 using OnlineWeatherService.WCF.IServices;
 using OnlineWeatherService.WCF.Models.Response;
 using System.ServiceModel;
@@ -17,7 +16,14 @@ namespace OnlineWeatherService.WCF.Services
         {
             try
             {
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    throw new FaultException<ServiceFault>(new ServiceFault("City name cannot be null or empty", 400));
+                }
+
                 var result = await _weatherService.GetWeatherAsync(name);
+                
                 if (result == null)
                 {
                     throw new FaultException<ServiceFault>(new ServiceFault("City not found", 404));

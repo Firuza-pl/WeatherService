@@ -6,14 +6,14 @@ namespace OnlineWeatherService.WCF.Services
     public class ServiceFault
     {
         [DataMember]
-        public string ErrorMessage { get; set; }
+        public string Message { get; set; }
 
         [DataMember]
         public int ErrorCode { get; set; }
 
         public ServiceFault(string message, int errorCode)
         {
-            ErrorMessage = message;
+            Message = message;
             ErrorCode = errorCode;
         }
     }

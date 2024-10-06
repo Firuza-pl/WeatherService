@@ -11,11 +11,12 @@ namespace OnlineWeatherService.WCF.EnableLogic
     {
         public static void LoadLogic(this IServiceCollection services)
         {
+            services.AddScoped<IWeatherSoapService, WeatherSoapService>();
             services.AddScoped<IWeatherService, WeatherService>();
             services.AddScoped<IWeatherRepository, WeatherRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IWeatherSoapService, WeatherSoapService>();
         }
+
     }
 }

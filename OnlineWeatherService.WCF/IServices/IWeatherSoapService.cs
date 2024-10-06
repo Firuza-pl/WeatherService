@@ -8,11 +8,9 @@ namespace OnlineWeatherService.WCF.IServices
     public interface IWeatherSoapService
     {
         [OperationContract]
-        [FaultContract(typeof(ServiceFault))] //will return ServiceFault type
-        Task<WeatherResponse> GetWeather(string name);
+        Task<WeatherResponse> GetWeather(string cityName);
 
         [OperationContract]
-        [FaultContract(typeof(ServiceFault))] 
         Task<ForeCastResponse> GetWeeklyForecast(string name);
     }
 }
