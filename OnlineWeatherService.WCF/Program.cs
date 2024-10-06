@@ -5,7 +5,10 @@ using OnlineWeatherService.Infrastructure.AutoMapper;
 using OnlineWeatherService.Infrastructure.Persistence;
 using OnlineWeatherService.WCF.EnableLogic;
 using OnlineWeatherService.WCF.IServices;
+using OnlineWeatherService.SharedKernel.Logging;
 using SoapCore;
+
+//WCF SERVICE
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<WeatherDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add memory cache services
+builder.Services.AddMemoryCache();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<WeatherDbContext>().AddDefaultTokenProviders();
@@ -28,7 +34,7 @@ builder.Services.AddLogging();
 //register serivce
 builder.Services.AddSingleton(AutoMapperConfig.CreateMapper());
 builder.Services.LoadLogic();
-
+builder.Services.ConfigureLogging();
 
 var app = builder.Build();
 
@@ -37,6 +43,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
 });
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnlineWeatherSoapService
+namespace ServiceReference1
 {
     using System.Runtime.Serialization;
     
@@ -72,7 +72,7 @@ namespace OnlineWeatherSoapService
         
         private string CityField;
         
-        private OnlineWeatherSoapService.WeatherResponse[] DailyForecastsField;
+        private ServiceReference1.WeatherResponse[] DailyForecastsField;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string City
@@ -88,7 +88,7 @@ namespace OnlineWeatherSoapService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OnlineWeatherSoapService.WeatherResponse[] DailyForecasts
+        public ServiceReference1.WeatherResponse[] DailyForecasts
         {
             get
             {
@@ -102,15 +102,15 @@ namespace OnlineWeatherSoapService
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="OnlineWeatherSoapService.IWeatherSoapService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IWeatherSoapService")]
     public interface IWeatherSoapService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherSoapService/GetWeather", ReplyAction="*")]
-        System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeatherResponse> GetWeatherAsync(OnlineWeatherSoapService.GetWeatherRequest request);
+        System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> GetWeatherAsync(ServiceReference1.GetWeatherRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherSoapService/GetWeeklyForecast", ReplyAction="*")]
-        System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeeklyForecastResponse> GetWeeklyForecastAsync(OnlineWeatherSoapService.GetWeeklyForecastRequest request);
+        System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> GetWeeklyForecastAsync(ServiceReference1.GetWeeklyForecastRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -121,13 +121,13 @@ namespace OnlineWeatherSoapService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeather", Namespace="http://tempuri.org/", Order=0)]
-        public OnlineWeatherSoapService.GetWeatherRequestBody Body;
+        public ServiceReference1.GetWeatherRequestBody Body;
         
         public GetWeatherRequest()
         {
         }
         
-        public GetWeatherRequest(OnlineWeatherSoapService.GetWeatherRequestBody Body)
+        public GetWeatherRequest(ServiceReference1.GetWeatherRequestBody Body)
         {
             this.Body = Body;
         }
@@ -141,15 +141,15 @@ namespace OnlineWeatherSoapService
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string city;
+        public string cityName;
         
         public GetWeatherRequestBody()
         {
         }
         
-        public GetWeatherRequestBody(string city)
+        public GetWeatherRequestBody(string cityName)
         {
-            this.city = city;
+            this.cityName = cityName;
         }
     }
     
@@ -161,13 +161,13 @@ namespace OnlineWeatherSoapService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeatherResponse", Namespace="http://tempuri.org/", Order=0)]
-        public OnlineWeatherSoapService.GetWeatherResponseBody Body;
+        public ServiceReference1.GetWeatherResponseBody Body;
         
         public GetWeatherResponse()
         {
         }
         
-        public GetWeatherResponse(OnlineWeatherSoapService.GetWeatherResponseBody Body)
+        public GetWeatherResponse(ServiceReference1.GetWeatherResponseBody Body)
         {
             this.Body = Body;
         }
@@ -181,13 +181,13 @@ namespace OnlineWeatherSoapService
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public OnlineWeatherSoapService.WeatherResponse GetWeatherResult;
+        public ServiceReference1.WeatherResponse GetWeatherResult;
         
         public GetWeatherResponseBody()
         {
         }
         
-        public GetWeatherResponseBody(OnlineWeatherSoapService.WeatherResponse GetWeatherResult)
+        public GetWeatherResponseBody(ServiceReference1.WeatherResponse GetWeatherResult)
         {
             this.GetWeatherResult = GetWeatherResult;
         }
@@ -201,13 +201,13 @@ namespace OnlineWeatherSoapService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeeklyForecast", Namespace="http://tempuri.org/", Order=0)]
-        public OnlineWeatherSoapService.GetWeeklyForecastRequestBody Body;
+        public ServiceReference1.GetWeeklyForecastRequestBody Body;
         
         public GetWeeklyForecastRequest()
         {
         }
         
-        public GetWeeklyForecastRequest(OnlineWeatherSoapService.GetWeeklyForecastRequestBody Body)
+        public GetWeeklyForecastRequest(ServiceReference1.GetWeeklyForecastRequestBody Body)
         {
             this.Body = Body;
         }
@@ -221,15 +221,15 @@ namespace OnlineWeatherSoapService
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string city;
+        public string name;
         
         public GetWeeklyForecastRequestBody()
         {
         }
         
-        public GetWeeklyForecastRequestBody(string city)
+        public GetWeeklyForecastRequestBody(string name)
         {
-            this.city = city;
+            this.name = name;
         }
     }
     
@@ -241,13 +241,13 @@ namespace OnlineWeatherSoapService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeeklyForecastResponse", Namespace="http://tempuri.org/", Order=0)]
-        public OnlineWeatherSoapService.GetWeeklyForecastResponseBody Body;
+        public ServiceReference1.GetWeeklyForecastResponseBody Body;
         
         public GetWeeklyForecastResponse()
         {
         }
         
-        public GetWeeklyForecastResponse(OnlineWeatherSoapService.GetWeeklyForecastResponseBody Body)
+        public GetWeeklyForecastResponse(ServiceReference1.GetWeeklyForecastResponseBody Body)
         {
             this.Body = Body;
         }
@@ -261,26 +261,26 @@ namespace OnlineWeatherSoapService
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public OnlineWeatherSoapService.ForeCastResponse GetWeeklyForecastResult;
+        public ServiceReference1.ForeCastResponse GetWeeklyForecastResult;
         
         public GetWeeklyForecastResponseBody()
         {
         }
         
-        public GetWeeklyForecastResponseBody(OnlineWeatherSoapService.ForeCastResponse GetWeeklyForecastResult)
+        public GetWeeklyForecastResponseBody(ServiceReference1.ForeCastResponse GetWeeklyForecastResult)
         {
             this.GetWeeklyForecastResult = GetWeeklyForecastResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IWeatherSoapServiceChannel : OnlineWeatherSoapService.IWeatherSoapService, System.ServiceModel.IClientChannel
+    public interface IWeatherSoapServiceChannel : ServiceReference1.IWeatherSoapService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class WeatherSoapServiceClient : System.ServiceModel.ClientBase<OnlineWeatherSoapService.IWeatherSoapService>, OnlineWeatherSoapService.IWeatherSoapService
+    public partial class WeatherSoapServiceClient : System.ServiceModel.ClientBase<ServiceReference1.IWeatherSoapService>, ServiceReference1.IWeatherSoapService
     {
         
         /// <summary>
@@ -324,31 +324,31 @@ namespace OnlineWeatherSoapService
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeatherResponse> OnlineWeatherSoapService.IWeatherSoapService.GetWeatherAsync(OnlineWeatherSoapService.GetWeatherRequest request)
+        System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> ServiceReference1.IWeatherSoapService.GetWeatherAsync(ServiceReference1.GetWeatherRequest request)
         {
             return base.Channel.GetWeatherAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeatherResponse> GetWeatherAsync(string city)
+        public System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> GetWeatherAsync(string cityName)
         {
-            OnlineWeatherSoapService.GetWeatherRequest inValue = new OnlineWeatherSoapService.GetWeatherRequest();
-            inValue.Body = new OnlineWeatherSoapService.GetWeatherRequestBody();
-            inValue.Body.city = city;
-            return ((OnlineWeatherSoapService.IWeatherSoapService)(this)).GetWeatherAsync(inValue);
+            ServiceReference1.GetWeatherRequest inValue = new ServiceReference1.GetWeatherRequest();
+            inValue.Body = new ServiceReference1.GetWeatherRequestBody();
+            inValue.Body.cityName = cityName;
+            return ((ServiceReference1.IWeatherSoapService)(this)).GetWeatherAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeeklyForecastResponse> OnlineWeatherSoapService.IWeatherSoapService.GetWeeklyForecastAsync(OnlineWeatherSoapService.GetWeeklyForecastRequest request)
+        System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> ServiceReference1.IWeatherSoapService.GetWeeklyForecastAsync(ServiceReference1.GetWeeklyForecastRequest request)
         {
             return base.Channel.GetWeeklyForecastAsync(request);
         }
         
-        public System.Threading.Tasks.Task<OnlineWeatherSoapService.GetWeeklyForecastResponse> GetWeeklyForecastAsync(string city)
+        public System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> GetWeeklyForecastAsync(string name)
         {
-            OnlineWeatherSoapService.GetWeeklyForecastRequest inValue = new OnlineWeatherSoapService.GetWeeklyForecastRequest();
-            inValue.Body = new OnlineWeatherSoapService.GetWeeklyForecastRequestBody();
-            inValue.Body.city = city;
-            return ((OnlineWeatherSoapService.IWeatherSoapService)(this)).GetWeeklyForecastAsync(inValue);
+            ServiceReference1.GetWeeklyForecastRequest inValue = new ServiceReference1.GetWeeklyForecastRequest();
+            inValue.Body = new ServiceReference1.GetWeeklyForecastRequestBody();
+            inValue.Body.name = name;
+            return ((ServiceReference1.IWeatherSoapService)(this)).GetWeeklyForecastAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

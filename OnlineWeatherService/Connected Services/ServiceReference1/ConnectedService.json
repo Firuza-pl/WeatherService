@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "https://localhost:7166/WeatherSoapService.asmx"
+      "https://localhost:7166/WeatherSoapService.asmx?wsdl"
     ],
     "collectionTypes": [
       "System.Array",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, OnlineWeatherSoapService"
+      "*, ServiceReference1"
     ],
     "references": [
       "AutoMapper, {AutoMapper, 13.0.1}",
@@ -18,9 +18,12 @@
       "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.Core.dll",
       "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.Infrastructure.dll",
       "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.SharedKernel.dll",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.WCF.dll",
       "Microsoft.AspNetCore.Cryptography.Internal, {Microsoft.AspNetCore.Cryptography.Internal, 8.0.8}",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation, {Microsoft.AspNetCore.Cryptography.KeyDerivation, 8.0.8}",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore, {Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.8}",
+      "Microsoft.AspNetCore.JsonPatch, {Microsoft.AspNetCore.JsonPatch, 8.0.8}",
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson, {Microsoft.AspNetCore.Mvc.NewtonsoftJson, 8.0.8}",
       "Microsoft.AspNetCore.OpenApi, {Microsoft.AspNetCore.OpenApi, 8.0.8}",
       "Microsoft.Bcl.AsyncInterfaces, {Microsoft.Bcl.AsyncInterfaces, 6.0.0}",
       "Microsoft.Data.SqlClient, {Microsoft.Data.SqlClient, 5.1.5}",
@@ -37,6 +40,7 @@
       "Microsoft.Extensions.Identity.Stores, {Microsoft.Extensions.Identity.Stores, 8.0.8}",
       "Microsoft.Extensions.Logging, {Microsoft.Extensions.Logging, 8.0.0}",
       "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 8.0.0}",
+      "Microsoft.Extensions.ObjectPool, {Microsoft.Extensions.ObjectPool, 6.0.16}",
       "Microsoft.Extensions.Options, {Microsoft.Extensions.Options, 8.0.2}",
       "Microsoft.Extensions.Primitives, {Microsoft.Extensions.Primitives, 8.0.0}",
       "Microsoft.Identity.Client, {Microsoft.Identity.Client, 4.56.0}",
@@ -46,25 +50,50 @@
       "Microsoft.IdentityModel.Logging, {Microsoft.IdentityModel.Logging, 6.35.0}",
       "Microsoft.IdentityModel.Protocols, {Microsoft.IdentityModel.Protocols, 6.35.0}",
       "Microsoft.IdentityModel.Protocols.OpenIdConnect, {Microsoft.IdentityModel.Protocols.OpenIdConnect, 6.35.0}",
+      "Microsoft.IdentityModel.Protocols.WsTrust, {Microsoft.IdentityModel.Protocols.WsTrust, 6.8.0}",
       "Microsoft.IdentityModel.Tokens, {Microsoft.IdentityModel.Tokens, 6.35.0}",
+      "Microsoft.IdentityModel.Tokens.Saml, {Microsoft.IdentityModel.Tokens.Saml, 6.8.0}",
+      "Microsoft.IdentityModel.Xml, {Microsoft.IdentityModel.Xml, 6.8.0}",
       "Microsoft.OpenApi, {Microsoft.OpenApi, 1.4.3}",
       "Microsoft.SqlServer.Server, {Microsoft.SqlServer.Server, 1.0.0}",
+      "Microsoft.Win32.SystemEvents, {Microsoft.Win32.SystemEvents, 6.0.0}",
+      "Newtonsoft.Json, {Newtonsoft.Json, 13.0.3}",
+      "Newtonsoft.Json.Bson, {Newtonsoft.Json.Bson, 1.0.2}",
+      "Serilog, {Serilog, 4.0.2}",
+      "Serilog.Extensions.Logging, {Serilog.Extensions.Logging, 8.0.0}",
+      "Serilog.Sinks.Console, {Serilog.Sinks.Console, 6.0.0}",
+      "SoapCore, {SoapCore, 1.1.0.51}",
       "Swashbuckle.AspNetCore.Swagger, {Swashbuckle.AspNetCore.Swagger, 6.4.0}",
       "Swashbuckle.AspNetCore.SwaggerGen, {Swashbuckle.AspNetCore.SwaggerGen, 6.4.0}",
       "Swashbuckle.AspNetCore.SwaggerUI, {Swashbuckle.AspNetCore.SwaggerUI, 6.4.0}",
+      "System.CodeDom, {System.CodeDom, 6.0.0}",
+      "System.Data.SqlClient, {System.Data.SqlClient, 4.8.6}",
       "System.Diagnostics.DiagnosticSource, {System.Diagnostics.DiagnosticSource, 6.0.1}",
+      "System.Drawing.Common, {System.Drawing.Common, 6.0.0}",
+      "System.Formats.Asn1, {System.Formats.Asn1, 6.0.0}",
       "System.IdentityModel.Tokens.Jwt, {System.IdentityModel.Tokens.Jwt, 6.35.0}",
+      "System.IO, {System.IO, 4.3.0}",
       "System.IO.FileSystem.AccessControl, {System.IO.FileSystem.AccessControl, 5.0.0}",
       "System.Memory.Data, {System.Memory.Data, 1.0.2}",
+      "System.Reflection.DispatchProxy, {System.Reflection.DispatchProxy, 4.7.1}",
       "System.Runtime, {System.Runtime, 4.3.0}",
       "System.Runtime.CompilerServices.Unsafe, {System.Runtime.CompilerServices.Unsafe, 6.0.0}",
       "System.Security.AccessControl, {System.Security.AccessControl, 6.0.0}",
       "System.Security.Cryptography.Cng, {System.Security.Cryptography.Cng, 5.0.0}",
+      "System.Security.Cryptography.Pkcs, {System.Security.Cryptography.Pkcs, 6.0.1}",
       "System.Security.Cryptography.ProtectedData, {System.Security.Cryptography.ProtectedData, 6.0.0}",
+      "System.Security.Cryptography.Xml, {System.Security.Cryptography.Xml, 6.0.1}",
       "System.Security.Principal.Windows, {System.Security.Principal.Windows, 5.0.0}",
+      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 6.0.0}",
+      "System.ServiceModel.Federation, {System.ServiceModel.Federation, 6.0.0}",
+      "System.ServiceModel.Http, {System.ServiceModel.Http, 6.0.0}",
+      "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 6.0.0}",
       "System.Text.Encoding, {System.Text.Encoding, 4.3.0}",
       "System.Text.Encodings.Web, {System.Text.Encodings.Web, 8.0.0}",
-      "System.Text.Json, {System.Text.Json, 8.0.4}"
+      "System.Text.Json, {System.Text.Json, 8.0.4}",
+      "System.Threading.Tasks, {System.Threading.Tasks, 4.3.0}",
+      "System.Xml.ReaderWriter, {System.Xml.ReaderWriter, 4.3.0}",
+      "System.Xml.XmlDocument, {System.Xml.XmlDocument, 4.3.0}"
     ],
     "targetFramework": "net8.0",
     "typeReuseMode": "All"
