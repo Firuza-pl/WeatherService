@@ -16,18 +16,13 @@ namespace OnlineWeatherService.WCF.Services
         {
             try
             {
-
                 if (string.IsNullOrEmpty(name))
-                {
                     throw new FaultException<ServiceFault>(new ServiceFault("City name cannot be null or empty", 400));
-                }
 
                 var result = await _weatherService.GetWeatherAsync(name);
-                
-                if (result == null)
-                {
+
+                if (result is null)
                     throw new FaultException<ServiceFault>(new ServiceFault("City not found", 404));
-                }
 
                 var outputModel = new WeatherResponse()
                 {
@@ -51,16 +46,18 @@ namespace OnlineWeatherService.WCF.Services
         {
             try
             {
-                var reesult = await _weatherService.GetWeeklyForecastAsync(name);
+                if (string.IsNullOrEmpty(name))
+                    throw new FaultException<ServiceFault>(new ServiceFault("City name can not be null", 400));
 
-                if (reesult is null) throw new FaultException<ServiceFault>(new ServiceFault("City not found", 404));
+                var entity = await _weatherService.GetWeeklyForecastAsync(name);
+
+                if (entity is null) throw new FaultException<ServiceFault>(new ServiceFault("City not found", 404));
 
                 var outputModel = new ForeCastResponse
                 {
-                    City = reesult.City,
-                    DailyForecasts = reesult.DailyForecasts.Select(p => new WeatherResponse
+                    City = entity.City,
+                    DailyForecast = entity.DailyForecasts.Select(p => new DailyResponse
                     {
-                        City = p.City,
                         Description = p.Description,
                         Temperature = p.Temperature
                     }).ToList()

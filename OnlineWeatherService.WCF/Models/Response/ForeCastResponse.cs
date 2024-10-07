@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using OnlineWeatherService.Core.Entities;
+using System.Runtime.Serialization;
 
 namespace OnlineWeatherService.WCF.Models.Response
 {
@@ -9,6 +10,6 @@ namespace OnlineWeatherService.WCF.Models.Response
         public string? City { get; set; }
 
         [DataMember]
-        public List<WeatherResponse>? DailyForecasts { get; set; }
+        public List<DailyResponse>? DailyForecast { get; set; }
     }
 }

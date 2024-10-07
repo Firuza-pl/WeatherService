@@ -10,7 +10,6 @@ namespace OnlineWeatherService.Infrastructure.Repositories
     {
         public WeatherRepository(WeatherDbContext contex, ILogger<WeatherRepository> logger) : base(contex, logger)
         {
-
         }
 
         public async Task<Forecast> GetForeactWeeklyAsync(string name)
@@ -18,7 +17,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 
             if (name is null) throw new ArgumentNullException(nameof(name));
 
-            return await _dbContext.Set<Forecast>().FirstOrDefaultAsync(x => x.City == name);
+            return await _dbContext.Set<Forecast>().Include(p=>p.DailyForecasts).FirstOrDefaultAsync(x => x.City == name);
 
         }
 

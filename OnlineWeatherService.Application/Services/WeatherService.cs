@@ -24,32 +24,51 @@ namespace OnlineWeatherService.Application.Services
         }
         public async Task<WeatherDTO> GetWeatherAsync(string name)
         {
+            try
+            {
+                _logger.LogInformation("Fetching weather for {City}", name);
+
+                if (_weatherCache.TryGetValue(name, out WeatherDTO cachedWeather))
+                {
+                    return cachedWeather;
+                }
+
+                var entity = await _unitOfWork.WeatherkRepository.GetWeatherAsync(name);
+
+                var outputModel = _mapper.Map<WeatherDTO>(entity);
+
+                if (outputModel == null)
+                {
+                    _logger.LogWarning("No weather data found for {City}", name);
+                }
+
+                _weatherCache.Set(name, outputModel, TimeSpan.FromMinutes(5)); // Store the result in cache with 
+
+                return outputModel;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentNullException(ex.Message);
+            }
+        }
+
+        public async Task<ForecastDTO> GetWeeklyForecastAsync(string name)
+        {
             _logger.LogInformation("Fetching weather for {City}", name);
 
-            if (_weatherCache.TryGetValue(name, out WeatherDTO cachedWeather))
+            if (_weatherCache.TryGetValue(name, out ForecastDTO cachedForecast))
             {
-                return cachedWeather;
+                return cachedForecast;
             }
+            var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(name);
 
-            var entity = await _unitOfWork.WeatherkRepository.GetWeatherAsync(name);
-
-            var outputModel = _mapper.Map<WeatherDTO>(entity);
+            var outputModel = _mapper.Map<ForecastDTO>(entity);
 
             if (outputModel == null)
             {
                 _logger.LogWarning("No weather data found for {City}", name);
             }
 
-            _weatherCache.Set(name, outputModel, TimeSpan.FromMinutes(5)); // Store the result in cache with 
-
-            return outputModel;
-        }
-
-        public async Task<ForecastDTO> GetWeeklyForecastAsync(string name)
-        {
-            var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(name);
-
-            var outputModel = _mapper.Map<ForecastDTO>(entity);
             return outputModel;
         }
 
