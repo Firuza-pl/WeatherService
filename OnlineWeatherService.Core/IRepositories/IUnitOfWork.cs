@@ -3,7 +3,7 @@
     public interface IUnitOfWork : IDisposable
     {
         IWeatherRepository WeatherkRepository { get; }
-        //IUserRepository UserRepository { get; }
+        IUserRepository UserRepository { get; }
         Task<int> SaveAsync();
     }
 }

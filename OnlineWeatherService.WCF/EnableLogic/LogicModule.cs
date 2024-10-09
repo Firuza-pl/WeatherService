@@ -14,6 +14,12 @@ namespace OnlineWeatherService.WCF.EnableLogic
             services.AddScoped<IWeatherSoapService, WeatherSoapService>();
             services.AddScoped<IWeatherService, WeatherService>();
             services.AddScoped<IWeatherRepository, WeatherRepository>();
+
+            services.AddScoped<IUserSoapService, UserSoapService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+            //general
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }

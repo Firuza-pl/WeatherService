@@ -11,21 +11,38 @@ namespace OnlineWeatherService.Application.Services
 	{
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;
-		private readonly IMemoryCache _weatherCache;
+		private readonly IMemoryCache _cache;
 		private readonly ILogger<UserService> _logger;
 
 
-		public UserService(IUnitOfWork unitOfWork, IMapper mapper, IMemoryCache weatherCache, ILogger<UserService> logger)
+		public UserService(IUnitOfWork unitOfWork, IMapper mapper, IMemoryCache cache, ILogger<UserService> logger)
 		{
 			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(_unitOfWork));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
-			_weatherCache = weatherCache ?? throw new ArgumentNullException(nameof(_weatherCache));
+			_cache = cache ?? throw new ArgumentNullException(nameof(_cache));
 			_logger = logger ?? throw new ArgumentNullException(nameof(_logger));
 		}
 
-		public Task<UserDTO> GetAllAsync()
+		public async Task<UserDTO> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				_logger.LogInformation("Getting all users");
+
+				var entity = await _unitOfWork.UserRepository.GetAllAsync();
+				var outputModel = _mapper.Map<UserDTO>(entity);
+
+				if (outputModel == null)
+				{
+					_logger.LogWarning("No data found");
+				}
+
+				return outputModel;
+			}
+			catch (Exception ex)
+			{
+				throw new ArgumentNullException(nameof(ex));
+			}
 		}
 	}
 

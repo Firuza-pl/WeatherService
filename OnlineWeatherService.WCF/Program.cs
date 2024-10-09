@@ -46,7 +46,9 @@ try
     app.UseEndpoints(endpoints =>
     {
         endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
-    });
+        endpoints.UseSoapEndpoint<IUserSoapService>("/UserSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
+
+	});
 
 
     // Configure the HTTP request pipeline.

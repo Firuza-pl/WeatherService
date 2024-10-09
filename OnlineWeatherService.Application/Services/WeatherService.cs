@@ -54,22 +54,30 @@ namespace OnlineWeatherService.Application.Services
 
         public async Task<ForecastDTO> GetWeeklyForecastAsync(string name)
         {
-            _logger.LogInformation("Fetching weather for {City}", name);
-
-            if (_weatherCache.TryGetValue(name, out ForecastDTO cachedForecast))
+            try
             {
-                return cachedForecast;
-            }
-            var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(name);
+				_logger.LogInformation("Fetching weather for {City}", name);
 
-            var outputModel = _mapper.Map<ForecastDTO>(entity);
+				if (_weatherCache.TryGetValue(name, out ForecastDTO cachedForecast))
+				{
+					return cachedForecast;
+				}
+				var entity = await _unitOfWork.WeatherkRepository.GetForeactWeeklyAsync(name);
 
-            if (outputModel == null)
+				var outputModel = _mapper.Map<ForecastDTO>(entity);
+
+				if (outputModel == null)
+				{
+					_logger.LogWarning("No weather data found for {City}", name);
+				}
+
+				return outputModel;
+			}
+            catch (Exception)
             {
-                _logger.LogWarning("No weather data found for {City}", name);
-            }
 
-            return outputModel;
+                throw;
+            }
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using OnlineWeatherService.WCF.Models.Response;
-using OnlineWeatherService.WCF.Services;
 using System.ServiceModel;
 
 namespace OnlineWeatherService.WCF.IServices
