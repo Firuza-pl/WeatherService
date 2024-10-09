@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using OnlineWeatherService.Application.DTO;
 
 namespace OnlineWeatherService.Application.IServices
 {
-    internal class IUserService
+    public interface IUserService
     {
+        Task<UserDTO> GetAllAsync();
     }
 }

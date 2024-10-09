@@ -12,6 +12,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
         {
         }
 
+        //additional methods
         public async Task<Forecast> GetForeactWeeklyAsync(string name)
         {
 

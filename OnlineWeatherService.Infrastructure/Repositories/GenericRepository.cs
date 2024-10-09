@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineWeatherService.Core.Entities;
 using OnlineWeatherService.Core.IRepositories;
 using OnlineWeatherService.Infrastructure.Persistence;
 

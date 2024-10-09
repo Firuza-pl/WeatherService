@@ -75,8 +75,9 @@ namespace OnlineWeatherService.Controllers
                     }
 
                     var result = await client.GetWeeklyForecastAsync(name);
+					logger.LogInformation("Received response: {@Entity}", result);
 
-                    if (result is null)
+					if (result is null)
                     {
                         logger.LogWarning("Weather data not found for city: {CityName}", name);
 

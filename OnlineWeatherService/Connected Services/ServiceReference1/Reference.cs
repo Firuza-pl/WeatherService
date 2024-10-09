@@ -72,7 +72,7 @@ namespace ServiceReference1
         
         private string CityField;
         
-        private ServiceReference1.WeatherResponse[] DailyForecastsField;
+        private ServiceReference1.DailyResponse[] DailyForecastField;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string City
@@ -88,15 +88,52 @@ namespace ServiceReference1
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference1.WeatherResponse[] DailyForecasts
+        public ServiceReference1.DailyResponse[] DailyForecast
         {
             get
             {
-                return this.DailyForecastsField;
+                return this.DailyForecastField;
             }
             set
             {
-                this.DailyForecastsField = value;
+                this.DailyForecastField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DailyResponse", Namespace="http://tempuri.org/")]
+    public partial class DailyResponse : object
+    {
+        
+        private string DescriptionField;
+        
+        private System.Nullable<decimal> TemperatureField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Description
+        {
+            get
+            {
+                return this.DescriptionField;
+            }
+            set
+            {
+                this.DescriptionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<decimal> Temperature
+        {
+            get
+            {
+                return this.TemperatureField;
+            }
+            set
+            {
+                this.TemperatureField = value;
             }
         }
     }

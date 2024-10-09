@@ -1,5 +1,4 @@
-﻿using OnlineWeatherService.Core.Entities;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace OnlineWeatherService.WCF.Models.Response
 {
