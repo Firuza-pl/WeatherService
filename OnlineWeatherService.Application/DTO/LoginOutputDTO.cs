@@ -1,7 +1,7 @@
 ﻿namespace OnlineWeatherService.Application.DTO
 {
-    public class UserDTO
-    {
+	public class LoginOutputDTO
+	{
 		public string? Id { get; set; }
 
 		public string? Name { get; set; }
@@ -12,7 +12,12 @@
 
 		public string? PhoneNumber { get; set; }
 
+		public string? Password { get; set; }
+
 		public string? Gender { get; set; }
 
+		public string? AccessToken { get; set; }
+
+		public string? RefreshToken { get; set; }
 	}
 }

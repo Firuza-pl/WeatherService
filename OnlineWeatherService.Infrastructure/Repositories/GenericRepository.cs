@@ -29,8 +29,13 @@ namespace OnlineWeatherService.Infrastructure.Repositories
             var result = await Entity.FindAsync(id);
             return result;
         }
+		public async Task<T> GetNameAsync(string name)
+		{
+			var result = await Entity.FindAsync(name);
+			return result;
+		}
 
-        public async Task AddAsync(T entity)
+		public async Task AddAsync(T entity)
         {
             await Entity.AddAsync(entity);
             await _dbContext.SaveChangesAsync();

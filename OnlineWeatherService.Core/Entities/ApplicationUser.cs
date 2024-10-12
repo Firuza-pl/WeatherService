@@ -9,6 +9,7 @@ namespace OnlineWeatherService.Core.Entities
         public DateTime? Birthday { get; set; }
         public byte? Status { get; set; }
         public byte? Gender { get; set; }
-        public List<UserPreference>? Preferences { get; set; }
+		public string? RefreshToken { get; set; }
+		public List<UserPreference>? Preferences { get; set; }
     }
 }
