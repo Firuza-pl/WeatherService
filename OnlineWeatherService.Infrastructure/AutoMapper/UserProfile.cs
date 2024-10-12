@@ -9,6 +9,8 @@ namespace OnlineWeatherService.Infrastructure.AutoMapper
         public UserProfile()
         {
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
-        }
-    }
+			CreateMap<ApplicationUser, LoginInputDTO>().ReverseMap();
+
+		}
+	}
 }

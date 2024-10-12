@@ -59,6 +59,7 @@ namespace OnlineWeatherService.WCF.Services
 					Gender = entity.Gender,
 					Email = entity.Email,
 					PhoneNumber = entity.PhoneNumber,
+					RefreshToken = entity.RefreshToken
 				};
 
 				return responseDTO;

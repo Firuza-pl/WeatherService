@@ -7,164 +7,234 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference1
+namespace AuthReferance
 {
     using System.Runtime.Serialization;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WeatherResponse", Namespace="http://tempuri.org/")]
-    public partial class WeatherResponse : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserResponse", Namespace="http://tempuri.org/")]
+    public partial class UserResponse : object
     {
         
-        private string CityField;
+        private string NameField;
         
-        private string DescriptionField;
+        private string SurnameField;
         
-        private System.Nullable<decimal> TemperatureField;
+        private string EmailField;
+        
+        private string PhoneNumberField;
+        
+        private string PasswordField;
+        
+        private string GenderField;
+        
+        private string AccessTokenField;
+        
+        private string RefreshTokenField;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string City
+        public string Name
         {
             get
             {
-                return this.CityField;
+                return this.NameField;
             }
             set
             {
-                this.CityField = value;
+                this.NameField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Description
+        public string Surname
         {
             get
             {
-                return this.DescriptionField;
+                return this.SurnameField;
             }
             set
             {
-                this.DescriptionField = value;
+                this.SurnameField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<decimal> Temperature
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Email
         {
             get
             {
-                return this.TemperatureField;
+                return this.EmailField;
             }
             set
             {
-                this.TemperatureField = value;
+                this.EmailField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string PhoneNumber
+        {
+            get
+            {
+                return this.PhoneNumberField;
+            }
+            set
+            {
+                this.PhoneNumberField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Password
+        {
+            get
+            {
+                return this.PasswordField;
+            }
+            set
+            {
+                this.PasswordField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Gender
+        {
+            get
+            {
+                return this.GenderField;
+            }
+            set
+            {
+                this.GenderField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string AccessToken
+        {
+            get
+            {
+                return this.AccessTokenField;
+            }
+            set
+            {
+                this.AccessTokenField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string RefreshToken
+        {
+            get
+            {
+                return this.RefreshTokenField;
+            }
+            set
+            {
+                this.RefreshTokenField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ForeCastResponse", Namespace="http://tempuri.org/")]
-    public partial class ForeCastResponse : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginRequest", Namespace="http://tempuri.org/")]
+    public partial class LoginRequest : object
     {
         
-        private string CityField;
+        private string PhoneNumberField;
         
-        private ServiceReference1.DailyResponse[] DailyForecastField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string City
-        {
-            get
-            {
-                return this.CityField;
-            }
-            set
-            {
-                this.CityField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference1.DailyResponse[] DailyForecast
-        {
-            get
-            {
-                return this.DailyForecastField;
-            }
-            set
-            {
-                this.DailyForecastField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DailyResponse", Namespace="http://tempuri.org/")]
-    public partial class DailyResponse : object
-    {
-        
-        private string DescriptionField;
-        
-        private System.Nullable<decimal> TemperatureField;
+        private string PasswordField;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Description
+        public string PhoneNumber
         {
             get
             {
-                return this.DescriptionField;
+                return this.PhoneNumberField;
             }
             set
             {
-                this.DescriptionField = value;
+                this.PhoneNumberField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public System.Nullable<decimal> Temperature
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Password
         {
             get
             {
-                return this.TemperatureField;
+                return this.PasswordField;
             }
             set
             {
-                this.TemperatureField = value;
+                this.PasswordField = value;
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IWeatherSoapService")]
-    public interface IWeatherSoapService
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AuthReferance.IUserSoapService")]
+    public interface IUserSoapService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherSoapService/GetWeather", ReplyAction="*")]
-        System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> GetWeatherAsync(ServiceReference1.GetWeatherRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserSoapService/GetAllUser", ReplyAction="*")]
+        System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> GetAllUserAsync(AuthReferance.GetAllUserRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherSoapService/GetWeeklyForecast", ReplyAction="*")]
-        System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> GetWeeklyForecastAsync(ServiceReference1.GetWeeklyForecastRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserSoapService/UserLogin", ReplyAction="*")]
+        System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> UserLoginAsync(AuthReferance.UserLoginRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetWeatherRequest
+    public partial class GetAllUserRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeather", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetWeatherRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllUser", Namespace="http://tempuri.org/", Order=0)]
+        public AuthReferance.GetAllUserRequestBody Body;
         
-        public GetWeatherRequest()
+        public GetAllUserRequest()
         {
         }
         
-        public GetWeatherRequest(ServiceReference1.GetWeatherRequestBody Body)
+        public GetAllUserRequest(AuthReferance.GetAllUserRequestBody Body)
+        {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetAllUserRequestBody
+    {
+        
+        public GetAllUserRequestBody()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAllUserResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllUserResponse", Namespace="http://tempuri.org/", Order=0)]
+        public AuthReferance.GetAllUserResponseBody Body;
+        
+        public GetAllUserResponse()
+        {
+        }
+        
+        public GetAllUserResponse(AuthReferance.GetAllUserResponseBody Body)
         {
             this.Body = Body;
         }
@@ -174,19 +244,19 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetWeatherRequestBody
+    public partial class GetAllUserResponseBody
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string cityName;
+        public AuthReferance.UserResponse GetAllUserResult;
         
-        public GetWeatherRequestBody()
+        public GetAllUserResponseBody()
         {
         }
         
-        public GetWeatherRequestBody(string cityName)
+        public GetAllUserResponseBody(AuthReferance.UserResponse GetAllUserResult)
         {
-            this.cityName = cityName;
+            this.GetAllUserResult = GetAllUserResult;
         }
     }
     
@@ -194,17 +264,17 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetWeatherResponse
+    public partial class UserLoginRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeatherResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetWeatherResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UserLogin", Namespace="http://tempuri.org/", Order=0)]
+        public AuthReferance.UserLoginRequestBody Body;
         
-        public GetWeatherResponse()
+        public UserLoginRequest()
         {
         }
         
-        public GetWeatherResponse(ServiceReference1.GetWeatherResponseBody Body)
+        public UserLoginRequest(AuthReferance.UserLoginRequestBody Body)
         {
             this.Body = Body;
         }
@@ -214,19 +284,19 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetWeatherResponseBody
+    public partial class UserLoginRequestBody
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ServiceReference1.WeatherResponse GetWeatherResult;
+        public AuthReferance.LoginRequest loginRequest;
         
-        public GetWeatherResponseBody()
+        public UserLoginRequestBody()
         {
         }
         
-        public GetWeatherResponseBody(ServiceReference1.WeatherResponse GetWeatherResult)
+        public UserLoginRequestBody(AuthReferance.LoginRequest loginRequest)
         {
-            this.GetWeatherResult = GetWeatherResult;
+            this.loginRequest = loginRequest;
         }
     }
     
@@ -234,17 +304,17 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetWeeklyForecastRequest
+    public partial class UserLoginResponse
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeeklyForecast", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetWeeklyForecastRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UserLoginResponse", Namespace="http://tempuri.org/", Order=0)]
+        public AuthReferance.UserLoginResponseBody Body;
         
-        public GetWeeklyForecastRequest()
+        public UserLoginResponse()
         {
         }
         
-        public GetWeeklyForecastRequest(ServiceReference1.GetWeeklyForecastRequestBody Body)
+        public UserLoginResponse(AuthReferance.UserLoginResponseBody Body)
         {
             this.Body = Body;
         }
@@ -254,70 +324,30 @@ namespace ServiceReference1
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetWeeklyForecastRequestBody
+    public partial class UserLoginResponseBody
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string name;
+        public AuthReferance.UserResponse UserLoginResult;
         
-        public GetWeeklyForecastRequestBody()
+        public UserLoginResponseBody()
         {
         }
         
-        public GetWeeklyForecastRequestBody(string name)
+        public UserLoginResponseBody(AuthReferance.UserResponse UserLoginResult)
         {
-            this.name = name;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetWeeklyForecastResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetWeeklyForecastResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ServiceReference1.GetWeeklyForecastResponseBody Body;
-        
-        public GetWeeklyForecastResponse()
-        {
-        }
-        
-        public GetWeeklyForecastResponse(ServiceReference1.GetWeeklyForecastResponseBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetWeeklyForecastResponseBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public ServiceReference1.ForeCastResponse GetWeeklyForecastResult;
-        
-        public GetWeeklyForecastResponseBody()
-        {
-        }
-        
-        public GetWeeklyForecastResponseBody(ServiceReference1.ForeCastResponse GetWeeklyForecastResult)
-        {
-            this.GetWeeklyForecastResult = GetWeeklyForecastResult;
+            this.UserLoginResult = UserLoginResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IWeatherSoapServiceChannel : ServiceReference1.IWeatherSoapService, System.ServiceModel.IClientChannel
+    public interface IUserSoapServiceChannel : AuthReferance.IUserSoapService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class WeatherSoapServiceClient : System.ServiceModel.ClientBase<ServiceReference1.IWeatherSoapService>, ServiceReference1.IWeatherSoapService
+    public partial class UserSoapServiceClient : System.ServiceModel.ClientBase<AuthReferance.IUserSoapService>, AuthReferance.IUserSoapService
     {
         
         /// <summary>
@@ -327,65 +357,64 @@ namespace ServiceReference1
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public WeatherSoapServiceClient() : 
-                base(WeatherSoapServiceClient.GetDefaultBinding(), WeatherSoapServiceClient.GetDefaultEndpointAddress())
+        public UserSoapServiceClient() : 
+                base(UserSoapServiceClient.GetDefaultBinding(), UserSoapServiceClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IWeatherSoapService_soap.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IUserSoapService_soap.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public WeatherSoapServiceClient(EndpointConfiguration endpointConfiguration) : 
-                base(WeatherSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), WeatherSoapServiceClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public WeatherSoapServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(WeatherSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public UserSoapServiceClient(EndpointConfiguration endpointConfiguration) : 
+                base(UserSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), UserSoapServiceClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public WeatherSoapServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(WeatherSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public UserSoapServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(UserSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public WeatherSoapServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public UserSoapServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(UserSoapServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public UserSoapServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> ServiceReference1.IWeatherSoapService.GetWeatherAsync(ServiceReference1.GetWeatherRequest request)
+        System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> AuthReferance.IUserSoapService.GetAllUserAsync(AuthReferance.GetAllUserRequest request)
         {
-            return base.Channel.GetWeatherAsync(request);
+            return base.Channel.GetAllUserAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetWeatherResponse> GetWeatherAsync(string cityName)
+        public System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> GetAllUserAsync()
         {
-            ServiceReference1.GetWeatherRequest inValue = new ServiceReference1.GetWeatherRequest();
-            inValue.Body = new ServiceReference1.GetWeatherRequestBody();
-            inValue.Body.cityName = cityName;
-            return ((ServiceReference1.IWeatherSoapService)(this)).GetWeatherAsync(inValue);
+            AuthReferance.GetAllUserRequest inValue = new AuthReferance.GetAllUserRequest();
+            inValue.Body = new AuthReferance.GetAllUserRequestBody();
+            return ((AuthReferance.IUserSoapService)(this)).GetAllUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> ServiceReference1.IWeatherSoapService.GetWeeklyForecastAsync(ServiceReference1.GetWeeklyForecastRequest request)
+        System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> AuthReferance.IUserSoapService.UserLoginAsync(AuthReferance.UserLoginRequest request)
         {
-            return base.Channel.GetWeeklyForecastAsync(request);
+            return base.Channel.UserLoginAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.GetWeeklyForecastResponse> GetWeeklyForecastAsync(string name)
+        public System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> UserLoginAsync(AuthReferance.LoginRequest loginRequest)
         {
-            ServiceReference1.GetWeeklyForecastRequest inValue = new ServiceReference1.GetWeeklyForecastRequest();
-            inValue.Body = new ServiceReference1.GetWeeklyForecastRequestBody();
-            inValue.Body.name = name;
-            return ((ServiceReference1.IWeatherSoapService)(this)).GetWeeklyForecastAsync(inValue);
+            AuthReferance.UserLoginRequest inValue = new AuthReferance.UserLoginRequest();
+            inValue.Body = new AuthReferance.UserLoginRequestBody();
+            inValue.Body.loginRequest = loginRequest;
+            return ((AuthReferance.IUserSoapService)(this)).UserLoginAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -395,7 +424,7 @@ namespace ServiceReference1
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWeatherSoapService_soap))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IUserSoapService_soap))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -410,27 +439,27 @@ namespace ServiceReference1
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWeatherSoapService_soap))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IUserSoapService_soap))
             {
-                return new System.ServiceModel.EndpointAddress("https://localhost:7166/WeatherSoapService.asmx");
+                return new System.ServiceModel.EndpointAddress("https://localhost:7166/UserSoapService.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return WeatherSoapServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IWeatherSoapService_soap);
+            return UserSoapServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IUserSoapService_soap);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return WeatherSoapServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IWeatherSoapService_soap);
+            return UserSoapServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IUserSoapService_soap);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IWeatherSoapService_soap,
+            BasicHttpBinding_IUserSoapService_soap,
         }
     }
 }

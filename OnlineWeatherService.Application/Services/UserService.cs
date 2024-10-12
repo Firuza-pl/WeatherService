@@ -69,6 +69,8 @@ namespace OnlineWeatherService.Application.Services
 
 			var outputModel = _mapper.Map<LoginOutputDTO>(users);
 			outputModel.AccessToken = accessToken;
+			outputModel.RefreshToken = users.RefreshToken;
+
 			return outputModel;
 		}
 	}

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineWeatherService.Core.IRepositories;
 using OnlineWeatherService.Infrastructure.Persistence;
@@ -9,8 +11,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
     {
         protected readonly WeatherDbContext _dbContext;
         protected readonly ILogger<GenericRepository<T>> _logger;
-
-        public GenericRepository(WeatherDbContext dbContext, ILogger<GenericRepository<T>> logger)
+		public GenericRepository(WeatherDbContext dbContext, ILogger<GenericRepository<T>> logger)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

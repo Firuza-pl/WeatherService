@@ -2,9 +2,9 @@
 using OnlineWeatherService.Infrastructure.Repositories;
 using OnlineWeatherService.Response;
 using OnlineWeatherService.WCF.Services;
-using ServiceReference1;
 using System.Net;
 using System.ServiceModel;
+using WeatherReferences;
 
 namespace OnlineWeatherService.Controllers
 {
@@ -12,11 +12,11 @@ namespace OnlineWeatherService.Controllers
     {
         public static void WeatherEndPoint(this IEndpointRouteBuilder endpoint)
         {
-            endpoint.MapGet("/api/GetWeather", async ([FromQuery] string name, [FromServices] WeatherSoapServiceClient client, ILogger<UnitOfWork> logger) =>
+            endpoint.MapGet("/api/GetWeather", static async ([FromQuery] string name, [FromServices] WeatherSoapServiceClient client, ILogger<UnitOfWork> logger) =>
             {
                 ApiResponse apiResponse = new();
 
-                logger.LogInformation("Received request to get weather for city: {CityName}", name);
+                logger.LogInformation($"Received request to get weather for city: {name}");
 
                 try
                 {
@@ -30,14 +30,14 @@ namespace OnlineWeatherService.Controllers
 
                     if (result is null)
                     {
-                        logger.LogWarning("Weather data not found for city: {CityName}", name);
+                        logger.LogWarning($"Weather data not found for city: {name}");
 
                         apiResponse.ErrorMessages.Add("entity is null");
                         apiResponse.StatusCode = HttpStatusCode.BadRequest;
                         apiResponse.IsSuccesed = false;
                     }
 
-                    logger.LogInformation("Successfully retrieved weather data for city: {CityName}", name);
+                    logger.LogInformation($"Successfully retrieved weather data for city: {name}");
 
                     apiResponse.Result = result.Body.GetWeatherResult;
                     apiResponse.StatusCode = HttpStatusCode.OK;
@@ -48,7 +48,7 @@ namespace OnlineWeatherService.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occurred while getting weather data for city: {CityName}", name);
+                    logger.LogError(ex, $"An error occurred while getting weather data for city: {name}");
                     throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 400));
                 }
             })
@@ -64,7 +64,7 @@ namespace OnlineWeatherService.Controllers
             {
                 ApiResponse apiResponse = new();
 
-                logger.LogInformation("Received request to get weather for city: {CityName}", name);
+                logger.LogInformation($"Received request to get weather for city: {name}");
 
                 try
                 {
@@ -75,18 +75,18 @@ namespace OnlineWeatherService.Controllers
                     }
 
                     var result = await client.GetWeeklyForecastAsync(name);
-					logger.LogInformation("Received response: {@Entity}", result);
+					logger.LogInformation($"Received response: {name}");
 
 					if (result is null)
                     {
-                        logger.LogWarning("Weather data not found for city: {CityName}", name);
+                        logger.LogWarning($"Weather data not found for city: {name}");
 
                         apiResponse.ErrorMessages.Add("entity is null");
                         apiResponse.StatusCode = HttpStatusCode.BadRequest;
                         apiResponse.IsSuccesed = false;
                     }
 
-                    logger.LogInformation("Successfully retrieved weather data for city: {CityName}", name);
+                    logger.LogInformation($"Successfully retrieved weather data for city: {name}");
 
                     apiResponse.Result = result.Body.GetWeeklyForecastResult;
                     apiResponse.StatusCode = HttpStatusCode.OK;
@@ -97,7 +97,7 @@ namespace OnlineWeatherService.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occurred while getting weather data for city: {CityName}", name);
+                    logger.LogError(ex, $"An error occurred while getting weather data for city: {name}");
                     throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 400));
                 }
             })

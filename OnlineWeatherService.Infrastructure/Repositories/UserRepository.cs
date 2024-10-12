@@ -13,14 +13,12 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IMapper _mapper;
-
 		public UserRepository(WeatherDbContext weatherDbContext, ILogger<UserRepository> logger,
 			UserManager<ApplicationUser> userManager, IMapper mapper) : base(weatherDbContext, logger)
 		{
 			_userManager = userManager ?? throw new ArgumentNullException(nameof(_userManager));
-			_mapper = mapper;
+			_mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
 		}
-
 
 		public async Task<ApplicationUser> GetUserByPhoneAsync(string phoneNumber)
 		{
