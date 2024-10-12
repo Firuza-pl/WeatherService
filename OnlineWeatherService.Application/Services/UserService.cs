@@ -60,7 +60,8 @@ namespace OnlineWeatherService.Application.Services
 			if (users == null)
 				throw new ArgumentNullException($"{nameof(users)}");
 
-			var signedUser = await _signInManager.PasswordSignInAsync(users, loginInput.Password, false, true);
+			var signedUser = await _signInManager.PasswordSignInAsync(users, loginInput.Password, false, true); 
+
 			if (!signedUser.Succeeded)
 				throw new UnauthorizedAccessException(nameof(signedUser));
 
