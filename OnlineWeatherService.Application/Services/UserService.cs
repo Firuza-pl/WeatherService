@@ -32,14 +32,14 @@ namespace OnlineWeatherService.Application.Services
 			_signInManager = signInManager ?? throw new ArgumentNullException(nameof(_signInManager));
 		}
 
-		public async Task<UserDTO> GetAllAsync()
+		public async Task<List<UserDTO>> GetAllAsync()
 		{
 			try
 			{
 				_logger.LogInformation("Getting all users");
 
 				var entity = await _unitOfWork.UserRepository.GetAllAsync();
-				var outputModel = _mapper.Map<UserDTO>(entity);
+				var outputModel = _mapper.Map<List<UserDTO>>(entity);
 
 				if (outputModel == null)
 				{

@@ -14,7 +14,7 @@
 
 		public string? Password { get; set; }
 
-		public string? Gender { get; set; }
+		public byte? Gender { get; set; }
 
 		public string? AccessToken { get; set; }
 

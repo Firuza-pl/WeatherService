@@ -15,7 +15,7 @@ namespace OnlineWeatherService.WCF.Services
 			_userService = userService ?? throw new ArgumentNullException(nameof(userService));
 		}
 
-		public async Task<UserResponse> GetAllUser()
+		public async Task<List<UserResponse>> GetAllUser()
 		{
 			try
 			{
@@ -23,14 +23,23 @@ namespace OnlineWeatherService.WCF.Services
 				if (entity is null)
 					throw new FaultException<ServiceFault>(new ServiceFault("data not found", 404));
 
-				var outputModel = new UserResponse
+				//var outputModel = new List<UserResponse>();
+				//foreach (var item in entity) {
+				//	outputModel.Add(new UserResponse
+				//	{
+				//		Name = item.Name,
+				//	});
+				//}
+
+				var outputModel = entity.Select(x => new UserResponse
 				{
-					Name = entity.Name,
-					Surname = entity.Surname,
-					Gender = entity.Gender,
-					Email = entity.Email,
-					PhoneNumber = entity.PhoneNumber,
-				};
+					Name = x.Name,
+					Surname = x.Surname,
+					Gender = x.Gender,
+					Email = x.Email,
+					Birthday = x.Birthday,
+					RefreshToken = x.RefreshToken
+				}).ToList();
 
 				return outputModel;
 			}

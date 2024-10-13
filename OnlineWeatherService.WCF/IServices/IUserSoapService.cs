@@ -8,7 +8,7 @@ namespace OnlineWeatherService.WCF.IServices
 	public interface IUserSoapService
 	{
 		[OperationContract]
-		Task<UserResponse> GetAllUser();
+		Task<List<UserResponse>> GetAllUser();
 
 		[OperationContract]
 		Task<UserResponse> UserLogin(LoginRequest loginRequest);

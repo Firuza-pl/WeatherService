@@ -4,7 +4,7 @@ namespace OnlineWeatherService.Application.IServices
 {
     public interface IUserService
     {
-        Task<UserDTO> GetAllAsync();
+        Task<List<UserDTO>> GetAllAsync();
         Task<LoginOutputDTO> GetLoginAsync(LoginInputDTO loginInput);
     }
 }
