@@ -19,10 +19,10 @@ namespace OnlineWeatherService.Application.Services
 		private readonly ILogger<UserService> _logger;
 		private readonly AppSettings _appSettings;
 		private readonly SignInManager<ApplicationUser> _signInManager;
-
+		private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 
 		public UserService(IUnitOfWork unitOfWork, IMapper mapper, IMemoryCache cache, ILogger<UserService> logger,
-			IOptions<AppSettings> appSettings, SignInManager<ApplicationUser> signInManager)
+			IOptions<AppSettings> appSettings, SignInManager<ApplicationUser> signInManager, IPasswordHasher<ApplicationUser> passwordHasher)
 		{
 			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(_unitOfWork));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
@@ -30,6 +30,7 @@ namespace OnlineWeatherService.Application.Services
 			_logger = logger ?? throw new ArgumentNullException(nameof(_logger));
 			_appSettings = appSettings.Value ?? throw new ArgumentNullException(nameof(_appSettings));
 			_signInManager = signInManager ?? throw new ArgumentNullException(nameof(_signInManager));
+			_passwordHasher = passwordHasher;
 		}
 
 		public async Task<List<UserDTO>> GetAllAsync()
@@ -56,22 +57,42 @@ namespace OnlineWeatherService.Application.Services
 
 		public async Task<LoginOutputDTO> GetLoginAsync(LoginInputDTO loginInput)
 		{
-			var users = await _unitOfWork.UserRepository.GetUserByPhoneAsync(loginInput.PhoneNumber);
-			if (users == null)
-				throw new ArgumentNullException($"{nameof(users)}");
+			try
+			{
+				var users = await _unitOfWork.UserRepository.GetUserByPhoneAsync(loginInput.PhoneNumber);
+				if (users == null)
+					throw new ArgumentNullException($"{nameof(users)}");
 
-			var signedUser = await _signInManager.PasswordSignInAsync(users, loginInput.Password, false, true); 
+				var signedUser = await _signInManager.PasswordSignInAsync(users, loginInput.Password, false, true);
 
-			if (!signedUser.Succeeded)
-				throw new UnauthorizedAccessException(nameof(signedUser));
+				if (!signedUser.Succeeded)
+					throw new UnauthorizedAccessException(nameof(signedUser));
 
-			var accessToken = TokenConfiguration.CreateToken(_appSettings, users.Id, Role.User);
+				var accessToken = TokenConfiguration.CreateToken(_appSettings, users.Id, Role.User);
 
-			var outputModel = _mapper.Map<LoginOutputDTO>(users);
-			outputModel.AccessToken = accessToken;
-			outputModel.RefreshToken = users.RefreshToken;
+				var outputModel = _mapper.Map<LoginOutputDTO>(users);
+				outputModel.AccessToken = accessToken;
+				outputModel.RefreshToken = users.RefreshToken;
 
-			return outputModel;
+				return outputModel;
+			}
+			catch (Exception ex)
+			{
+				throw new ArgumentNullException(nameof(ex));
+			}
+		}
+
+		public Task<RegisterOutputDTO> RegisterAsync(RegisterInputDTO loginInput)
+		{
+			try
+			{
+
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
 		}
 	}
 

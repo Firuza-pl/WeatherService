@@ -1,5 +1,7 @@
+using AuthReferences;
 using OnlineWeatherService.Controllers;
 using System;
+using WeatherReferences;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 });
 
-builder.Services.AddScoped<WeatherReferences.WeatherSoapServiceClient>();
-builder.Services.AddScoped<AuthReferance.UserSoapServiceClient>();
+builder.Services.AddScoped<WeatherSoapServiceClient>();
+builder.Services.AddScoped<UserSoapServiceClient>();
 
 
 var app = builder.Build();

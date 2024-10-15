@@ -5,6 +5,7 @@ using OnlineWeatherService.WCF.Models.Request;
 using OnlineWeatherService.WCF.Models.Response;
 using System.ServiceModel;
 
+
 namespace OnlineWeatherService.WCF.Services
 {
 	public class UserSoapService : IUserSoapService
@@ -22,14 +23,6 @@ namespace OnlineWeatherService.WCF.Services
 				var entity = await _userService.GetAllAsync();
 				if (entity is null)
 					throw new FaultException<ServiceFault>(new ServiceFault("data not found", 404));
-
-				//var outputModel = new List<UserResponse>();
-				//foreach (var item in entity) {
-				//	outputModel.Add(new UserResponse
-				//	{
-				//		Name = item.Name,
-				//	});
-				//}
 
 				var outputModel = entity.Select(x => new UserResponse
 				{
@@ -75,7 +68,42 @@ namespace OnlineWeatherService.WCF.Services
 			}
 			catch (Exception ex)
 			{
-				throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 500));
+				throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 500), new FaultReason(ex.Message));
+			}
+		}
+
+		public async Task<UserResponse> UserRegister(RegisterRequest registerRequest)
+		{
+			try
+			{
+				if (registerRequest == null)
+					throw new ArgumentNullException(nameof(registerRequest));
+
+				var request = new RegisterInputDTO {
+				Name = registerRequest.Name,
+				Surname=registerRequest.Surname,
+				Gender = registerRequest.Gender,
+				Email = registerRequest.Email,
+				Status = registerRequest.Status,
+				Birthday = registerRequest.Birthday
+				};
+
+				var entity = await _userService.RegisterAsync(request);
+
+				var responseDTO = new UserResponse
+				{
+					Name = entity.Name,
+					Surname = entity.Surname,
+					Gender = entity.Gender,
+					Email = entity.Email,
+					PhoneNumber = entity.PhoneNumber,
+				};
+
+				return responseDTO;
+			}
+			catch (Exception ex)
+			{
+				throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 500), new FaultReason(ex.Message));
 			}
 		}
 	}

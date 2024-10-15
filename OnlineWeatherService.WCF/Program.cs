@@ -8,6 +8,10 @@ using OnlineWeatherService.WCF.IServices;
 using OnlineWeatherService.SharedKernel.Logging;
 using SoapCore;
 using Serilog;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using OnlineWeatherService.WCF.Services;
+using OnlineWeatherService.Application.Helper;
+using SoapCore.Extensibility;
 
 //WCF SERVICE
 
@@ -30,9 +34,10 @@ try
     builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<WeatherDbContext>().AddDefaultTokenProviders();
 
+	builder.Services.AddSoapCore();
 
-   //register serivce
-    builder.Services.AddSingleton(AutoMapperConfig.CreateMapper());
+	//register serivce
+	builder.Services.AddSingleton(AutoMapperConfig.CreateMapper());
     builder.Services.LoadLogic();
     builder.Services.ConfigureLogging();
 

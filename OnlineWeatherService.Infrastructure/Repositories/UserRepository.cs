@@ -20,6 +20,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
 		}
 
+		//additional methods
 		public async Task<ApplicationUser> GetUserByPhoneAsync(string phoneNumber)
 		{
 			try

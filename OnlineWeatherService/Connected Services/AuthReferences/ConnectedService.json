@@ -8,12 +8,17 @@
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, AuthReferance"
+      "*, AuthReferences"
     ],
     "references": [
       "AutoMapper, {AutoMapper, 13.0.1}",
       "Azure.Core, {Azure.Core, 1.35.0}",
       "Azure.Identity, {Azure.Identity, 1.10.3}",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.Application.dll",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.Core.dll",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.Infrastructure.dll",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.SharedKernel.dll",
+      "C:\\Users\\asus\\Desktop\\WeatherService\\OnlineWeatherService\\bin\\Debug\\net8.0\\OnlineWeatherService.WCF.dll",
       "Microsoft.AspNetCore.Authentication, {Microsoft.AspNetCore.Authentication, 2.2.0}",
       "Microsoft.AspNetCore.Authentication.Abstractions, {Microsoft.AspNetCore.Authentication.Abstractions, 2.2.0}",
       "Microsoft.AspNetCore.Authentication.Cookies, {Microsoft.AspNetCore.Authentication.Cookies, 2.2.0}",

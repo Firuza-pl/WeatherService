@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuthReferance
+namespace AuthReferences
 {
     using System.Runtime.Serialization;
     
@@ -28,7 +28,9 @@ namespace AuthReferance
         
         private string PasswordField;
         
-        private string GenderField;
+        private System.Nullable<byte> GenderField;
+        
+        private System.Nullable<System.DateTime> BirthdayField;
         
         private string AccessTokenField;
         
@@ -99,8 +101,8 @@ namespace AuthReferance
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string Gender
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public System.Nullable<byte> Gender
         {
             get
             {
@@ -112,7 +114,20 @@ namespace AuthReferance
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public System.Nullable<System.DateTime> Birthday
+        {
+            get
+            {
+                return this.BirthdayField;
+            }
+            set
+            {
+                this.BirthdayField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string AccessToken
         {
             get
@@ -125,7 +140,7 @@ namespace AuthReferance
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public string RefreshToken
         {
             get
@@ -177,87 +192,15 @@ namespace AuthReferance
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AuthReferance.IUserSoapService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AuthReferences.IUserSoapService")]
     public interface IUserSoapService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserSoapService/GetAllUser", ReplyAction="*")]
-        System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> GetAllUserAsync(AuthReferance.GetAllUserRequest request);
+        System.Threading.Tasks.Task<AuthReferences.UserResponse[]> GetAllUserAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserSoapService/UserLogin", ReplyAction="*")]
-        System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> UserLoginAsync(AuthReferance.UserLoginRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetAllUserRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllUser", Namespace="http://tempuri.org/", Order=0)]
-        public AuthReferance.GetAllUserRequestBody Body;
-        
-        public GetAllUserRequest()
-        {
-        }
-        
-        public GetAllUserRequest(AuthReferance.GetAllUserRequestBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class GetAllUserRequestBody
-    {
-        
-        public GetAllUserRequestBody()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetAllUserResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllUserResponse", Namespace="http://tempuri.org/", Order=0)]
-        public AuthReferance.GetAllUserResponseBody Body;
-        
-        public GetAllUserResponse()
-        {
-        }
-        
-        public GetAllUserResponse(AuthReferance.GetAllUserResponseBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetAllUserResponseBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public AuthReferance.UserResponse GetAllUserResult;
-        
-        public GetAllUserResponseBody()
-        {
-        }
-        
-        public GetAllUserResponseBody(AuthReferance.UserResponse GetAllUserResult)
-        {
-            this.GetAllUserResult = GetAllUserResult;
-        }
+        System.Threading.Tasks.Task<AuthReferences.UserLoginResponse> UserLoginAsync(AuthReferences.UserLoginRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -268,13 +211,13 @@ namespace AuthReferance
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="UserLogin", Namespace="http://tempuri.org/", Order=0)]
-        public AuthReferance.UserLoginRequestBody Body;
+        public AuthReferences.UserLoginRequestBody Body;
         
         public UserLoginRequest()
         {
         }
         
-        public UserLoginRequest(AuthReferance.UserLoginRequestBody Body)
+        public UserLoginRequest(AuthReferences.UserLoginRequestBody Body)
         {
             this.Body = Body;
         }
@@ -288,13 +231,13 @@ namespace AuthReferance
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public AuthReferance.LoginRequest loginRequest;
+        public AuthReferences.LoginRequest loginRequest;
         
         public UserLoginRequestBody()
         {
         }
         
-        public UserLoginRequestBody(AuthReferance.LoginRequest loginRequest)
+        public UserLoginRequestBody(AuthReferences.LoginRequest loginRequest)
         {
             this.loginRequest = loginRequest;
         }
@@ -308,13 +251,13 @@ namespace AuthReferance
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="UserLoginResponse", Namespace="http://tempuri.org/", Order=0)]
-        public AuthReferance.UserLoginResponseBody Body;
+        public AuthReferences.UserLoginResponseBody Body;
         
         public UserLoginResponse()
         {
         }
         
-        public UserLoginResponse(AuthReferance.UserLoginResponseBody Body)
+        public UserLoginResponse(AuthReferences.UserLoginResponseBody Body)
         {
             this.Body = Body;
         }
@@ -328,26 +271,26 @@ namespace AuthReferance
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public AuthReferance.UserResponse UserLoginResult;
+        public AuthReferences.UserResponse UserLoginResult;
         
         public UserLoginResponseBody()
         {
         }
         
-        public UserLoginResponseBody(AuthReferance.UserResponse UserLoginResult)
+        public UserLoginResponseBody(AuthReferences.UserResponse UserLoginResult)
         {
             this.UserLoginResult = UserLoginResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IUserSoapServiceChannel : AuthReferance.IUserSoapService, System.ServiceModel.IClientChannel
+    public interface IUserSoapServiceChannel : AuthReferences.IUserSoapService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class UserSoapServiceClient : System.ServiceModel.ClientBase<AuthReferance.IUserSoapService>, AuthReferance.IUserSoapService
+    public partial class UserSoapServiceClient : System.ServiceModel.ClientBase<AuthReferences.IUserSoapService>, AuthReferences.IUserSoapService
     {
         
         /// <summary>
@@ -390,31 +333,23 @@ namespace AuthReferance
         {
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> AuthReferance.IUserSoapService.GetAllUserAsync(AuthReferance.GetAllUserRequest request)
+        public System.Threading.Tasks.Task<AuthReferences.UserResponse[]> GetAllUserAsync()
         {
-            return base.Channel.GetAllUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<AuthReferance.GetAllUserResponse> GetAllUserAsync()
-        {
-            AuthReferance.GetAllUserRequest inValue = new AuthReferance.GetAllUserRequest();
-            inValue.Body = new AuthReferance.GetAllUserRequestBody();
-            return ((AuthReferance.IUserSoapService)(this)).GetAllUserAsync(inValue);
+            return base.Channel.GetAllUserAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> AuthReferance.IUserSoapService.UserLoginAsync(AuthReferance.UserLoginRequest request)
+        System.Threading.Tasks.Task<AuthReferences.UserLoginResponse> AuthReferences.IUserSoapService.UserLoginAsync(AuthReferences.UserLoginRequest request)
         {
             return base.Channel.UserLoginAsync(request);
         }
         
-        public System.Threading.Tasks.Task<AuthReferance.UserLoginResponse> UserLoginAsync(AuthReferance.LoginRequest loginRequest)
+        public System.Threading.Tasks.Task<AuthReferences.UserLoginResponse> UserLoginAsync(AuthReferences.LoginRequest loginRequest)
         {
-            AuthReferance.UserLoginRequest inValue = new AuthReferance.UserLoginRequest();
-            inValue.Body = new AuthReferance.UserLoginRequestBody();
+            AuthReferences.UserLoginRequest inValue = new AuthReferences.UserLoginRequest();
+            inValue.Body = new AuthReferences.UserLoginRequestBody();
             inValue.Body.loginRequest = loginRequest;
-            return ((AuthReferance.IUserSoapService)(this)).UserLoginAsync(inValue);
+            return ((AuthReferences.IUserSoapService)(this)).UserLoginAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

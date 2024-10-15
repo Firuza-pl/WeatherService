@@ -11,6 +11,11 @@ namespace OnlineWeatherService.WCF.IServices
 		Task<List<UserResponse>> GetAllUser();
 
 		[OperationContract]
+		Task<UserResponse> UserRegister(RegisterRequest registerRequest);
+
+		[OperationContract]
 		Task<UserResponse> UserLogin(LoginRequest loginRequest);
+
+
 	}
 }
