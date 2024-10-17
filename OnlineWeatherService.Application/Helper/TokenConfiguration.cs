@@ -81,8 +81,6 @@ namespace OnlineWeatherService.Application.Helper
 		{
 			try
 			{
-				string? username = string.Empty;
-
 				ClaimsPrincipal principal = GetPrincipal(appSettings, token);
 
 				if (principal is null)

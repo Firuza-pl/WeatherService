@@ -7,5 +7,6 @@ namespace OnlineWeatherService.Application.IServices
         Task<List<UserDTO>> GetAllAsync();
         Task<LoginOutputDTO> GetLoginAsync(LoginInputDTO loginInput);
 		Task<RegisterOutputDTO> RegisterAsync(RegisterInputDTO loginInput);
+        Task<bool> ValidateTokenAsync(VerifyTokenDTO verifyTokenDTO);
 	}
 }

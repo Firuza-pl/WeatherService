@@ -11,7 +11,8 @@ namespace OnlineWeatherService.Infrastructure.AutoMapper
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
 			CreateMap<ApplicationUser, LoginInputDTO>().ReverseMap();
 			CreateMap<ApplicationUser, RegisterInputDTO>().ReverseMap();
-
+			CreateMap<ApplicationUser, RegisterOutputDTO>().ReverseMap();
+			CreateMap<ApplicationUser, LoginOutputDTO>().ReverseMap();
 		}
 	}
 }

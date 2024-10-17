@@ -8,69 +8,68 @@ using OnlineWeatherService.WCF.IServices;
 using OnlineWeatherService.SharedKernel.Logging;
 using SoapCore;
 using Serilog;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using OnlineWeatherService.WCF.Services;
 using OnlineWeatherService.Application.Helper;
-using SoapCore.Extensibility;
 
 //WCF SERVICE
 
 try
 {
-    var builder = WebApplication.CreateBuilder(args);
+	var builder = WebApplication.CreateBuilder(args);
 
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
+	// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+	builder.Services.AddEndpointsApiExplorer();
 
-    builder.Services.AddDbContext<WeatherDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+	builder.Services.AddDbContext<WeatherDbContext>(options =>
+		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+	//builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-    builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
+	builder.Host.UseSerilog((context, configuration) =>
+configuration.ReadFrom.Configuration(context.Configuration));
 
-    // Add memory cache services
-    builder.Services.AddMemoryCache();
+	// Add memory cache services
+	builder.Services.AddMemoryCache();
 
-    builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<WeatherDbContext>().AddDefaultTokenProviders();
+	builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+		.AddEntityFrameworkStores<WeatherDbContext>().AddDefaultTokenProviders();
 
 	builder.Services.AddSoapCore();
 
 	//register serivce
 	builder.Services.AddSingleton(AutoMapperConfig.CreateMapper());
-    builder.Services.LoadLogic();
-    builder.Services.ConfigureLogging();
+	builder.Services.LoadLogic();
+	builder.Services.ConfigureLogging();
+	builder.Services.JwtLoad(builder.Configuration);
 
-    builder.Logging.ClearProviders();
-    builder.Logging.AddConsole();
+	builder.Logging.ClearProviders();
+	builder.Logging.AddConsole();
 
 
-    var app = builder.Build();
+	var app = builder.Build();
 
-    app.UseRouting();
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
-        endpoints.UseSoapEndpoint<IUserSoapService>("/UserSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
+	app.UseRouting();
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.UseSoapEndpoint<IWeatherSoapService>("/WeatherSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
+		endpoints.UseSoapEndpoint<IUserSoapService>("/UserSoapService.asmx", new SoapEncoderOptions(), SoapSerializer.XmlSerializer);   ///WeatherSoapService.asmx
 
 	});
 
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-    }
+	// Configure the HTTP request pipeline.
+	if (app.Environment.IsDevelopment())
+	{
+	}
 
-    app.UseHttpsRedirection();
+	app.UseHttpsRedirection();
 
 
-    app.Run();
+	app.Run();
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Application start-up failed");
+	Log.Fatal(ex, "Application start-up failed");
 }
 finally
 {
-    Log.CloseAndFlush();
+	Log.CloseAndFlush();
 }

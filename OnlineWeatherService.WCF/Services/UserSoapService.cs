@@ -82,6 +82,8 @@ namespace OnlineWeatherService.WCF.Services
 				var request = new RegisterInputDTO {
 				Name = registerRequest.Name,
 				Surname=registerRequest.Surname,
+				PhoneNumber=registerRequest.PhoneNumber,
+				Password = registerRequest.Password,
 				Gender = registerRequest.Gender,
 				Email = registerRequest.Email,
 				Status = registerRequest.Status,

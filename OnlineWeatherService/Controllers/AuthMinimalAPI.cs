@@ -1,8 +1,8 @@
-﻿using AuthReferences;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineWeatherService.Infrastructure.Repositories;
 using OnlineWeatherService.Response;
 using OnlineWeatherService.WCF.Services;
+using ServiceReference1;
 using System.Net;
 using System.ServiceModel;
 
@@ -95,14 +95,14 @@ namespace OnlineWeatherService.Controllers
 
 			//register 
 
-			endpoint.MapPost("/api/Register", async ([FromServices] UserSoapServiceClient client, ILogger<UnitOfWork> logger, [FromBody] LoginRequest loginRequest) =>
+			endpoint.MapPost("/api/Register", async ([FromServices] UserSoapServiceClient client, ILogger<UnitOfWork> logger, [FromBody] RegisterRequest registerRequest) =>
 				{
 					ApiResponse apiResponse = new();
 
 					try
 					{
 
-						var result = await client.UserLoginAsync(loginRequest);
+						var result = await client.UserRegisterAsync(registerRequest);
 
 						if (result is null)
 						{

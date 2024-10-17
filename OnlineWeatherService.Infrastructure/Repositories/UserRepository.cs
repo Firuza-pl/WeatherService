@@ -30,10 +30,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 				if (user == null)
 					throw new ArgumentNullException(nameof(user));
 
-				var randomNumber = GenerateRandomNumber();
-				user.RefreshToken = $"{randomNumber}_{user.Id}_{user.PhoneNumber}";
-
-				await _userManager.UpdateAsync(user);
+				await GenerateRefreshToken(user);
 
 				return user;
 			}
@@ -43,6 +40,16 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 			}
 		}
 
+		public async Task<IdentityResult> GenerateRefreshToken(ApplicationUser user) {
+
+
+			var randomNumber = GenerateRandomNumber();
+			user.RefreshToken = $"{randomNumber}_{user.Id}_{user.PhoneNumber}";
+
+			return await _userManager.UpdateAsync(user);
+		}
+
+
 		public string GenerateRandomNumber()
 		{
 			var random = new byte[32];
@@ -51,6 +58,42 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 			return Convert.ToBase64String(random);
 		}
 
+		public async Task<bool> CheckDublicate(string phoneNumber)
+		{
+			try
+			{
+				var user = await _userManager.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
+
+				if (user != false)
+					throw new ArgumentException($"{user} is already in db");
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				throw new ArgumentException("User is in already db");
+			}
+		}
+
+		public async Task<IdentityResult> CreateRoleUser(ApplicationUser user, string password)
+		{
+			try
+			{
+				var register = await _userManager.CreateAsync(user, password);
+				if(register is null)
+					throw new ArgumentNullException(nameof(register));
+
+				await _userManager.AddToRoleAsync(user, Role.User);
+				await _dbContext.SaveChangesAsync();
+
+				return register;
+			}
+			catch (Exception ex)
+			{
+				throw ex ?? new ArgumentNullException(nameof(ex.Message));
+			}
+
+		}
 
 
 	}

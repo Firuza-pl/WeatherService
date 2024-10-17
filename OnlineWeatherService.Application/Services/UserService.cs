@@ -19,10 +19,9 @@ namespace OnlineWeatherService.Application.Services
 		private readonly ILogger<UserService> _logger;
 		private readonly AppSettings _appSettings;
 		private readonly SignInManager<ApplicationUser> _signInManager;
-		private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 
 		public UserService(IUnitOfWork unitOfWork, IMapper mapper, IMemoryCache cache, ILogger<UserService> logger,
-			IOptions<AppSettings> appSettings, SignInManager<ApplicationUser> signInManager, IPasswordHasher<ApplicationUser> passwordHasher)
+			IOptions<AppSettings> appSettings, SignInManager<ApplicationUser> signInManager)
 		{
 			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(_unitOfWork));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
@@ -30,7 +29,6 @@ namespace OnlineWeatherService.Application.Services
 			_logger = logger ?? throw new ArgumentNullException(nameof(_logger));
 			_appSettings = appSettings.Value ?? throw new ArgumentNullException(nameof(_appSettings));
 			_signInManager = signInManager ?? throw new ArgumentNullException(nameof(_signInManager));
-			_passwordHasher = passwordHasher;
 		}
 
 		public async Task<List<UserDTO>> GetAllAsync()
@@ -82,17 +80,40 @@ namespace OnlineWeatherService.Application.Services
 			}
 		}
 
-		public Task<RegisterOutputDTO> RegisterAsync(RegisterInputDTO loginInput)
+
+		public async Task<RegisterOutputDTO> RegisterAsync(RegisterInputDTO loginInput)
 		{
 			try
 			{
+				var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckDublicate(loginInput.PhoneNumber);
+				if (isPhoneAlreadyRegistered is true)
+					throw new ArgumentException($"{isPhoneAlreadyRegistered} is already registered");
 
+				var entity = _mapper.Map<ApplicationUser>(loginInput);
+				entity.UserName = loginInput.PhoneNumber;
+				entity.Status = (byte)loginInput.Status;
+
+				var result = await _unitOfWork.UserRepository.CreateRoleUser(entity, loginInput.Password);
+				var outputModel = _mapper.Map<ApplicationUser, RegisterOutputDTO>(entity);
+				return outputModel;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-
-				throw;
+				throw new ArgumentNullException(nameof(ex.Message));
 			}
+		}
+
+		public async Task<bool> ValidateTokenAsync(VerifyTokenDTO verifyTokenDTO)
+		{
+			var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckDublicate(verifyTokenDTO.PhoneNumber);
+			if (isPhoneAlreadyRegistered is true)
+				throw new ArgumentException($"{isPhoneAlreadyRegistered} is already registered");
+
+			var validateTokenId = TokenConfiguration.ValidateToken(_appSettings, verifyTokenDTO.Token);
+			if (validateTokenId is null)
+				throw new ArgumentException();
+
+			return true;
 		}
 	}
 
