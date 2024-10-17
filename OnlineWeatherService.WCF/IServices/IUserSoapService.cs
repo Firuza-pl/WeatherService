@@ -16,6 +16,8 @@ namespace OnlineWeatherService.WCF.IServices
 		[OperationContract]
 		Task<UserResponse> UserLogin(LoginRequest loginRequest);
 
+		[OperationContract]
+		Task<bool> ValidateToken(VerifyTokenRequest loginRequest);
 
 	}
 }

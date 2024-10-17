@@ -108,5 +108,27 @@ namespace OnlineWeatherService.WCF.Services
 				throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 500), new FaultReason(ex.Message));
 			}
 		}
+
+		public async Task<bool> ValidateToken(VerifyTokenRequest loginRequest)
+		{
+			try
+			{
+				var model = new VerifyTokenDTO
+				{
+					PhoneNumber = loginRequest.PhoneNumber,
+					Token = loginRequest.Token
+				};
+
+				var entity = await _userService.ValidateTokenAsync(model);
+				if (entity is false)
+					throw new ArgumentNullException(nameof(entity));
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 500));
+			}
+		}
 	}
 }
