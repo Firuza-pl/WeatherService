@@ -8,7 +8,6 @@ using OnlineWeatherService.WCF.IServices;
 using OnlineWeatherService.SharedKernel.Logging;
 using SoapCore;
 using Serilog;
-using OnlineWeatherService.Application.Helper;
 
 //WCF SERVICE
 

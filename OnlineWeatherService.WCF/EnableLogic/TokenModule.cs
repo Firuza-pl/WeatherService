@@ -34,7 +34,6 @@ namespace OnlineWeatherService.WCF.EnableLogic
 					x.RequireHttpsMetadata = false;
 					x.SaveToken = true;
 				});
-
 		}
 	}
 }

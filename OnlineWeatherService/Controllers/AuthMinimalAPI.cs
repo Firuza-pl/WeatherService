@@ -2,7 +2,7 @@
 using OnlineWeatherService.Infrastructure.Repositories;
 using OnlineWeatherService.Response;
 using OnlineWeatherService.WCF.Services;
-using ServiceReference1;
+using ServiceReference2;
 using System.Net;
 using System.ServiceModel;
 
@@ -49,7 +49,7 @@ namespace OnlineWeatherService.Controllers
 				.Produces<ApiResponse>(200)
 				.Produces<ApiResponse>(400)
 				.Produces<ApiResponse>(500)
-				.WithTags("Auth");
+				.WithTags("User");
 
 
 			//login
@@ -73,7 +73,7 @@ namespace OnlineWeatherService.Controllers
 
 					logger.LogInformation("Successfully retrieved data");
 
-					apiResponse.Result = result;
+					apiResponse.Result = result.Body.UserLoginResult;
 					apiResponse.StatusCode = HttpStatusCode.OK;
 					apiResponse.IsSuccesed = true;
 
@@ -93,16 +93,16 @@ namespace OnlineWeatherService.Controllers
 				.WithTags("Auth");
 
 
-			//register 
+			//Validate  
 
-			endpoint.MapPost("/api/Register", async ([FromServices] UserSoapServiceClient client, ILogger<UnitOfWork> logger, [FromBody] RegisterRequest registerRequest) =>
+			endpoint.MapPost("/api/ValidateToken", async ([FromServices] UserSoapServiceClient client, ILogger<UnitOfWork> logger, [FromBody] VerifyTokenRequest registerRequest) =>
 				{
 					ApiResponse apiResponse = new();
 
 					try
 					{
 
-						var result = await client.UserRegisterAsync(registerRequest);
+						var result = await client.ValidateTokenAsync(registerRequest);
 
 						if (result is null)
 						{
@@ -115,7 +115,7 @@ namespace OnlineWeatherService.Controllers
 
 						logger.LogInformation("Successfully retrieved data");
 
-						apiResponse.Result = result;
+						apiResponse.Result = $"Token validation is : {result.Body.ValidateTokenResult}";
 						apiResponse.StatusCode = HttpStatusCode.OK;
 						apiResponse.IsSuccesed = true;
 
@@ -128,11 +128,52 @@ namespace OnlineWeatherService.Controllers
 						throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 400), new FaultReason(ex.Message));
 					}
 				})
-					.WithName("UserRegister")
+					.WithName("ValidateToken")
 					.Produces<ApiResponse>(200)
 					.Produces<ApiResponse>(400)
 					.Produces<ApiResponse>(500)
 					.WithTags("Auth");
+
+
+			//register
+			endpoint.MapPost("/api/Register", async ([FromServices] UserSoapServiceClient client, ILogger<UnitOfWork> logger, [FromBody] RegisterRequest registerRequest) =>
+					{
+						ApiResponse apiResponse = new();
+
+						try
+						{
+
+							var result = await client.UserRegisterAsync(registerRequest);
+
+							if (result is null)
+							{
+								logger.LogWarning("User data not found");
+
+								apiResponse.ErrorMessages.Add("entity is null");
+								apiResponse.StatusCode = HttpStatusCode.BadRequest;
+								apiResponse.IsSuccesed = false;
+							}
+
+							logger.LogInformation("Successfully retrieved data");
+
+							apiResponse.Result = result;
+							apiResponse.StatusCode = HttpStatusCode.OK;
+							apiResponse.IsSuccesed = true;
+
+
+							return Results.Ok(apiResponse);
+						}
+						catch (Exception ex)
+						{
+							logger.LogError(ex, "An error occurred while getting data");
+							throw new FaultException<ServiceFault>(new ServiceFault(ex.Message, 400), new FaultReason(ex.Message));
+						}
+					})
+						.WithName("UserRegister")
+						.Produces<ApiResponse>(200)
+						.Produces<ApiResponse>(400)
+						.Produces<ApiResponse>(500)
+						.WithTags("Auth");
 		}
 	}
 }

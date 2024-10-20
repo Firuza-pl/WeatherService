@@ -17,7 +17,7 @@ namespace OnlineWeatherService.Application.Helper
 
 				var claims = new ClaimsIdentity([
 					new Claim(ClaimTypes.Name, id),
-				new Claim(ClaimTypes.Role,name)
+	new Claim(ClaimTypes.Role,name)
 					]);
 
 				var descriptor = new SecurityTokenDescriptor
@@ -55,7 +55,7 @@ namespace OnlineWeatherService.Application.Helper
 
 				var parameters = new TokenValidationParameters
 				{
-					ValidateIssuer = false, //change for security
+					ValidateIssuer = false, //change for security to true
 					ValidateAudience = false,
 					IssuerSigningKey = new SymmetricSecurityKey(key),
 					ValidateIssuerSigningKey = true,
@@ -65,16 +65,15 @@ namespace OnlineWeatherService.Application.Helper
 
 				SecurityToken security;
 				ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(token, parameters, out security);
-				JwtSecurityToken jwtSecurity = security as JwtSecurityToken;  //for furture options if needed
+				JwtSecurityToken jwtSecurity = security as JwtSecurityToken;  //for furture options if needed like jwtSecurity.Claims
 
 				return claimsPrincipal;
 			}
-			catch 
+			catch
 			{
 
 				throw;
 			}
-
 		}
 
 		public static string ValidateToken(AppSettings appSettings, string token)
@@ -86,12 +85,9 @@ namespace OnlineWeatherService.Application.Helper
 				if (principal is null)
 					throw new ArgumentNullException(nameof(principal));
 
-				var claimsIdentity = principal.Identity as ClaimsIdentity;
+				ClaimsIdentity? claimsIdentity = principal.Identity as ClaimsIdentity;
 
-				var claim = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-
-				if(claim is null)
-					throw new ArgumentNullException(nameof(claim));
+				var claim = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value ?? throw new ArgumentNullException(nameof(claimsIdentity)); 
 
 				return claim;
 			}
@@ -99,6 +95,7 @@ namespace OnlineWeatherService.Application.Helper
 			{
 				throw;
 			}
+
 
 		}
 

@@ -57,7 +57,7 @@ namespace OnlineWeatherService.Application.Services
 		{
 			try
 			{
-				var users = await _unitOfWork.UserRepository.GetUserByPhoneAsync(loginInput.PhoneNumber);
+				var users = await _unitOfWork.UserRepository.GenerateRefreshToken(loginInput.PhoneNumber);
 				if (users == null)
 					throw new ArgumentNullException($"{nameof(users)}");
 
@@ -85,7 +85,7 @@ namespace OnlineWeatherService.Application.Services
 		{
 			try
 			{
-				var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckDublicate(loginInput.PhoneNumber);
+				var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckPhoneNumber(loginInput.PhoneNumber);
 				if (isPhoneAlreadyRegistered is true)
 					throw new ArgumentException($"{isPhoneAlreadyRegistered} is already registered");
 
@@ -105,8 +105,8 @@ namespace OnlineWeatherService.Application.Services
 
 		public async Task<bool> ValidateTokenAsync(VerifyTokenDTO verifyTokenDTO)
 		{
-			var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckDublicate(verifyTokenDTO.PhoneNumber);
-			if (isPhoneAlreadyRegistered is true)
+			var isPhoneAlreadyRegistered = await _unitOfWork.UserRepository.CheckPhoneNumber(verifyTokenDTO.PhoneNumber);
+			if (isPhoneAlreadyRegistered is false)
 				throw new ArgumentException($"{isPhoneAlreadyRegistered} is already registered");
 
 			var validateTokenId = TokenConfiguration.ValidateToken(_appSettings, verifyTokenDTO.Token);

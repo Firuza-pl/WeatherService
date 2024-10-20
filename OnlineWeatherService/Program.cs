@@ -1,5 +1,5 @@
 using OnlineWeatherService.Controllers;
-using ServiceReference1;
+using ServiceReference2;
 using WeatherReferences;
 
 var builder = WebApplication.CreateBuilder(args);

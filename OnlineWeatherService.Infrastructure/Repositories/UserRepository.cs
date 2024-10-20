@@ -21,7 +21,7 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 		}
 
 		//additional methods
-		public async Task<ApplicationUser> GetUserByPhoneAsync(string phoneNumber)
+		public async Task<ApplicationUser> GenerateRefreshToken(string phoneNumber)
 		{
 			try
 			{
@@ -30,7 +30,9 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 				if (user == null)
 					throw new ArgumentNullException(nameof(user));
 
-				await GenerateRefreshToken(user);
+				var randomNumber = GenerateRandomNumber();
+				user.RefreshToken = $"{randomNumber}_{user.Id}_{user.PhoneNumber}";
+				await _userManager.UpdateAsync(user);
 
 				return user;
 			}
@@ -40,16 +42,6 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 			}
 		}
 
-		public async Task<IdentityResult> GenerateRefreshToken(ApplicationUser user) {
-
-
-			var randomNumber = GenerateRandomNumber();
-			user.RefreshToken = $"{randomNumber}_{user.Id}_{user.PhoneNumber}";
-
-			return await _userManager.UpdateAsync(user);
-		}
-
-
 		public string GenerateRandomNumber()
 		{
 			var random = new byte[32];
@@ -58,13 +50,13 @@ namespace OnlineWeatherService.Infrastructure.Repositories
 			return Convert.ToBase64String(random);
 		}
 
-		public async Task<bool> CheckDublicate(string phoneNumber)
+		public async Task<bool> CheckPhoneNumber(string phoneNumber)
 		{
 			try
 			{
-				var user = await _userManager.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
+				var user = await _userManager.Users.SingleOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
 
-				if (user != false)
+				if (user is null)
 					throw new ArgumentException($"{user} is already in db");
 
 				return true;

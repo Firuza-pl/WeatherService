@@ -5,8 +5,8 @@ namespace OnlineWeatherService.Core.IRepositories
 {
 	public interface IUserRepository : IGenericRepository<ApplicationUser>
 	{
-		public Task<ApplicationUser> GetUserByPhoneAsync(string phoneNumber);
+		public Task<ApplicationUser> GenerateRefreshToken(string phoneNumber);
 		public Task<IdentityResult> CreateRoleUser(ApplicationUser user, string password);
-		public Task<bool> CheckDublicate(string phoneNumber);
+		public Task<bool> CheckPhoneNumber(string phoneNumber);
 	}
 }
